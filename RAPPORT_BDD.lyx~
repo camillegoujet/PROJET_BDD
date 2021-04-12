@@ -1,0 +1,942 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+\usepackage{hyperref}   % pour les liens cliquables de la table des matières
+ 
+\makeatletter
+\@addtoreset{section}{part}   % reprendre à partir de 1 les sections des parties suivantes.
+\makeatother
+ 
+\renewcommand{\thesection}{\Roman{part}.\arabic{section}}
+\setcounter{secnumdepth}{0}
+\end_preamble
+\use_default_options true
+\begin_modules
+InStar
+\end_modules
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref true
+\pdf_bookmarks true
+\pdf_bookmarksnumbered true
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder false
+\pdf_colorlinks true
+\pdf_backref false
+\pdf_pdfusetitle false
+\pdf_quoted_options "linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+Rapport de projet de bases de données
+\end_layout
+
+\begin_layout Author
+CAMILLE GOUJET & EMERIC NODET
+\begin_inset Newline newline
+\end_inset
+
+À L'ATTENTION DE NATHALIE CHAIGNAUD
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Présentation et analyse du sujet
+\end_layout
+
+\begin_layout Subsection
+Présentation du sujet
+\end_layout
+
+\begin_layout Standard
+La géopolitique est devenue avec la mondialisation, fondamentale dans la
+ compréhension de nos rapports internationaux.
+ C’est pourquoi nous avons décidé de nous y intéresser dans le cadre de
+ notre projet BDD avec l’idée de créer un modèle simple et compréhensible
+ qui mettrait en évidence les différentes associations et conflits entre
+ pays et les raisons qui les y poussent du point de vue d'une organisation
+ telle que l'ONU.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Les questions que nous pourrions nous poser sous les suivantes :
+\begin_inset Newline newline
+\end_inset
+
+- Quels pays composent l’union commerciale du Commonwealth (dont le dénominateur
+ commun est l’ancien empire britannique et donc sa langue) ? 
+\begin_inset Newline newline
+\end_inset
+
+- Quels sont les raisons des conflits au Moyen-Orient ? 
+\begin_inset Newline newline
+\end_inset
+
+- Quelles sont les religions majoritaires des pays pour un conflit donné
+ ? 
+\begin_inset Newline newline
+\end_inset
+
+- Trier par ordre croissant les IDH des membres d’une même alliance économique
+ (comme le BRICS).
+\end_layout
+
+\begin_layout Subsection
+Modèle Entités/Associations
+\end_layout
+
+\begin_layout Standard
+Tout d'abord, il nous faut définir ce que l'on va considérer comme un pays.
+ Ici, il est reconnaissable à son nom et à son numéro d'identification.
+ Il est également important de connaître son indice de développement humain
+ (IDH), son produit intérieur brut (PIB), si il possède l'arme atomique
+ ou non..
+ Ainsi, on aura une entité Pays composée des éléments : IDPays, Nom, PIB,
+ IDH, Arme atomique.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Chacun des pays acteurs de ces relations internationales peut aussi posséder
+ une ou plusieurs langues officielles et chacune d'entre elles peut être
+ considérée comme la langue officielle de plusieurs pays à la fois ou d'aucun
+ pour les langues mortes.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Un pays peut aussi posséder une ou plusieurs confessions, dont une majoritaire
+ que l'on considèrera donc unique.
+ Cette confession pourra s'avérer être la croyance majoritaire de plusieurs
+ pays comme d'aucun.
+ On crée alors l'entité Confession composée des attributs suivants : IDConfessio
+n, Nom et d'un booléen indiquant si elle est majoritaire dans le pays auquel
+ elle est rattachée ou non.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Les pays sont peuplés par des personnes.
+ Chacune de ces personnes est citoyenne d'un seul pays mais peut avoir différent
+es nationalités.
+ Ainsi, on crée l'entité Citoyen composée des élements : IDCitoyen, Nom,
+ Prénom, Nationalité.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Dans notre modèle, nous avons crée 3 relations ternaires.
+ Celles-ci sont utiles quand on a besoin de connaître une occurrence de
+ chaque entité pour avoir une information.
+\begin_inset Newline newline
+\end_inset
+
+Ici, pour connaître la guerre qui a eu lieu à un endroit donné, à une date
+ donnée et engageant les pays donnés, on utilise une association ternaire
+ entre PAYS, DATE et LIEU.
+ La perte en nombre d'hommes et en dollars est une donnée portée par cette
+ association.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+De même, on crée une relation ternaire engageant les entités DIRIGEANT,
+ DATE et PAYS pour que l'on puisse connaître à une date donnée et dans un
+ pays donné, le nom et le statut du dirigeant au pouvoir à ce moment-là.
+ Ainsi, on crée une entité Dirigeant composée des attributs suivants : IDDirigea
+nt, Nom, Prénom et statut (roi, empereur, président, etc..)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+De la même manière en créant le relation ternaire engageant les entités
+ ALLIANCE, PAYS et DATE, on peut connaître toutes les alliances existentes
+ à une date donnée et pour les pays donnés avec son nom ainsi que son type
+ (économique ou militaire).
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Enfin, un pays peut être relié à une ou plusieurs armées si l'on considère
+ les types de celles-ci (marine, armée de terre, armée de l'air).
+ Il peut aussi ne pas avoir d'armée.
+ Une armée en revanche appartient à un et un seul pays.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ Pour finir, nous n'avons aucune entité faible dans notre modèle.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Nous allons donc modéliser ces relations internationales de la façon suivante
+ :
+\begin_inset Newline newline
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Modèle E/A 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/camille/Téléchargements/ModeleE_A(3).png
+	lyxscale 60
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+Justification des cardinalités : 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Dans cette partie, nous allons tenter d'expliquer les cardinalités que nous
+ avons choisi d'inscrire sur notre modèle Entités/Associations afin de les
+ rendre plus claires.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Langue officielle et Pays :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ - Langue officielle vers Pays : cardinalité de type 
+\series bold
+[ 0, n ]
+\series default
+ car une langue peut être la langue officielle d'aucun pays (Latin) mais
+ elle peut aussi bien être celle de plusieurs pays (Anglais)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+- Pays vers Langue officielle: cardinalité de type 
+\series bold
+[ 1,n ]
+\series default
+ car un pays peut avoir une seule langue officielle (France) mais un autre
+ peut tout aussi bien en avoir plusieurs (Suisse).
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Armée et Pays :
+\begin_inset Newline newline
+\end_inset
+
+- Pays vers Armée : cardinalité de type 
+\series bold
+[ 0, n ]
+\series default
+ car chaque pays peut avoir plusieurs armées si l'on considère les types
+ différents de celles-ci mais il peut aussi ne pas en avoirdu tout.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+- Armée vers Pays : cardinalité de type 
+\series bold
+[ 1, 1 ]
+\series default
+ car une armée appartient à un et un seul pays.
+ (Les alliances militaires sont répertoriés ailleurs, on décide de ne pas
+ les compter comme armée commune à plusieurs pays)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Relation ternaire engageant Pays, Date et Lieu :
+\begin_inset Newline newline
+\end_inset
+
+À une date donnée, on peut trouver aucun (si il n'y pas de guerre) à n pays.
+ Une date donnée peut aussi conrrespondre à aucun comme à plusieurs lieux
+ différents (on se laisse le droit de mettre 
+\begin_inset Quotes eld
+\end_inset
+
+NULL
+\begin_inset Quotes erd
+\end_inset
+
+ si l'endroit n'est pas explicitement nommable (exemple : guerre froide).
+ Enfin, un pays peut et a pu être engagé dans plusieurs guerres s'étant
+ déroulées à des endroits distincts mais à des dates distinctes aussi.
+ Ainsi, on choisit une cardinalité 
+\series bold
+[ 0,n ] 
+\series default
+pour toutes les entités de la relation.
+ Cela nous permet en fait de pouvoir retracer tout le parcours belliqueux
+ d'un pays en temps et en espace.
+
+\series bold
+ 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Précision :
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nous avons en effet un doute sur l’intérêt d’une entité Citoyen que l’on
+ pourrait décrire comme une personne avec une religion, une langue, une
+ sensibilité politique qui peuvent être individuels ou regroupés dans Pays.
+ Cependant, nous avons décidé de le garder pour le moment parce que nous
+ considérons qu'il est intéressant de pouvoir faire des statistiques sur
+ les différentes proportions des religieux au sein d'un même pays même si
+ nous le rappelons, les statistiques officiels de ce genre sont interdites
+ en France.
+\end_layout
+
+\begin_layout Subsection
+Modèle relationnel
+\end_layout
+
+\begin_layout Standard
+Pour passer au modèle relationnel, on utilise les règles énoncées en cours.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pour chaque entité, on crée une relation de même nom que l’entité et chaque
+ propriété de l’entité, y compris l’identifiant, devient un attribut de
+ la relation et l’identifiant constitue la clé.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pour les associations 1:n entre A et B: on crée les relations RA et RB correspon
+dant aux entités A et B, l’identifiant de B devient un attribut de RA.
+ Une occurrence de A référence l’occurrence de B qui lui est associée à
+ l’aide d’une clé étrangère.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ici, on a donc l'identitfiant de Pays qui deviennent des attributs de Armée
+ et Citoyen.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ensuite, pour les associations binaires n:n entre A et B: on crée les relations
+ RA et RB correspondant aux entités A et B, on crée une relation RAB pour
+ l’association, la clé de RA et la clé de RB deviennent des attributs de
+ RAB, la clé de cette relation est la concaténation des clés de RA et RB
+ et les propriétés de l’association deviennent des attributs de RAB.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ainsi pour notre modèle, on crée les relations parler et posséder qui sont
+ les associations reliant respectivement Langue et Pays, et Confession et
+ Pays.
+ Ainsi, les identifiants de Langue et Pays deviennent des attributs de parler
+ et les identifiants de Confession et Pays ceux de posséder.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+En ce qui concerne nos 3 associations ternaires, on atteint une des limites
+ du modèle E/A en matière de spécification de contraintes.
+ En première approche, on peut appliquer la règle énoncée pour les associations
+ binaires généralisées
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ce qui donne finalement le modèle relationnel suivant :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pays (
+\series bold
+IDPays
+\series default
+, Nom, PIB, IDH, Arme atomique)
+\begin_inset Newline newline
+\end_inset
+
+Langue officielle(
+\series bold
+IDLangue
+\series default
+, Nom)
+\begin_inset Newline newline
+\end_inset
+
+parler(
+\series bold
+IDPays
+\series default
+,
+\series bold
+ IDLangue
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+Confession (
+\series bold
+IDConfession
+\series default
+, Nom, IDPays, majoritaire (O/N))
+\begin_inset Newline newline
+\end_inset
+
+posséder(
+\series bold
+IDPays,IDConfession
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+Citoyen(
+\series bold
+IDCitoyen
+\series default
+, Nom, Prénom, Nationalité, IDPays)
+\begin_inset Newline newline
+\end_inset
+
+former (
+\series bold
+IDAlliance
+\series default
+, 
+\series bold
+IDPays
+\series default
+,
+\series bold
+ IDDates
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+Alliance (
+\series bold
+IDAlliance
+\series default
+, Nom, Type)
+\begin_inset Newline newline
+\end_inset
+
+Date(
+\series bold
+IDDate
+\series default
+, Date début, Date fin) 
+\begin_inset Newline newline
+\end_inset
+
+guerre(
+\series bold
+IDDate
+\series default
+s, 
+\series bold
+IDPays
+\series default
+, 
+\series bold
+IDLieu
+\series default
+, Perte en nb d’hommes, Perte en argent)
+\begin_inset Newline newline
+\end_inset
+
+Lieu (
+\series bold
+IDLieu
+\series default
+, Nom) 
+\begin_inset Newline newline
+\end_inset
+
+Date(
+\series bold
+IDDate
+\series default
+, Date début, Date fin) 
+\begin_inset Newline newline
+\end_inset
+
+Armée(
+\series bold
+IDArmée
+\series default
+, Effectif, Nom, type, IDPays)
+\begin_inset Newline newline
+\end_inset
+
+diriger(
+\series bold
+IDDirigeant
+\series default
+, 
+\series bold
+IDPays
+\series default
+,
+\series bold
+ IDDates
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+Dirigeant(
+\series bold
+IDDirigeant
+\series default
+, Nom, Prénom, Statut) 
+\begin_inset Newline newline
+\end_inset
+
+Date(
+\series bold
+IDDate
+\series default
+, Date début, Date fin) 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Dénormalisation possible 
+\end_layout
+
+\begin_layout Standard
+Dénormaliser le modèle permet de simplifier le schéma relationnel en réduisant
+ le nombre d’éléments qui le composent et faciliter l’accès aux données
+ en introduisant un certain degré de redondance.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Cela consiste en partie à supprimer les entités qui portent peu d’attributs
+ en les déplaçant vers une autre relation.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Ici, il nous est inutile de conserver les entités Lieu, Dates pour les associati
+ons former, diriger, et guerre.
+\begin_inset Newline newline
+\end_inset
+
+Donc le modèle relationnel devient :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pays (
+\series bold
+IDPays
+\series default
+, Nom, PIB, IDH, Arme atomique)
+\begin_inset Newline newline
+\end_inset
+
+Langue officielle(
+\series bold
+IDLangue
+\series default
+, Nom)
+\begin_inset Newline newline
+\end_inset
+
+parler(
+\series bold
+IDPays
+\series default
+,
+\series bold
+ IDLangue
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+Confession (
+\series bold
+IDConfession
+\series default
+, Nom, IDPays, majoritaire (O/N))
+\begin_inset Newline newline
+\end_inset
+
+posséder(
+\series bold
+IDPays,IDConfession
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+Citoyen(
+\series bold
+IDCitoyen
+\series default
+, Nom, Prénom, Nationalité, IDPays)
+\begin_inset Newline newline
+\end_inset
+
+Alliance (
+\series bold
+IDAlliance
+\series default
+, Nom, Type)
+\begin_inset Newline newline
+\end_inset
+
+Date(
+\series bold
+IDDate
+\series default
+, Date début, Date fin) 
+\begin_inset Newline newline
+\end_inset
+
+former (
+\series bold
+IDAlliance
+\series default
+, 
+\series bold
+IDPays
+\series default
+,
+\series bold
+ IDDates
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+guerre(
+\series bold
+IDDate
+\series default
+s, 
+\series bold
+IDPays
+\series default
+, 
+\series bold
+IDLieu
+\series default
+, Perte en nb d’hommes, Perte en argent)
+\begin_inset Newline newline
+\end_inset
+
+Lieu (
+\series bold
+IDLieu
+\series default
+, Nom) 
+\begin_inset Newline newline
+\end_inset
+
+Date(
+\series bold
+IDDate
+\series default
+, Date début, Date fin) 
+\begin_inset Newline newline
+\end_inset
+
+Armée(
+\series bold
+IDArmée
+\series default
+, Effectif, Nom, type, IDPays)
+\begin_inset Newline newline
+\end_inset
+
+Dirigeant(
+\series bold
+IDDirigeant
+\series default
+, Nom, Prénom, Statut, Date début, Date fin) 
+\begin_inset Newline newline
+\end_inset
+
+diriger(
+\series bold
+IDDirigeant
+\series default
+, 
+\series bold
+IDPays
+\series default
+,
+\series bold
+ IDDates
+\series default
+)
+\end_layout
+
+\begin_layout Section
+Implémentation de la base de données
+\end_layout
+
+\begin_layout Section
+Création de la base de données sous mySQL
+\end_layout
+
+\begin_layout Section
+Requêtes SQL
+\end_layout
+
+\end_body
+\end_document
