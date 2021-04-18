@@ -55,7 +55,7 @@ InStar
 \pdf_pdfusetitle false
 \pdf_quoted_options "linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -80,6 +80,8 @@ InStar
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 3cm
+\rightmargin 3cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -165,7 +167,7 @@ Les questions que nous pourrions nous poser sous les suivantes :
 \begin_inset Newline newline
 \end_inset
 
-- Quels sont les raisons des conflits au Moyen-Orient ? 
+- Quelles sont les raisons des conflits au Moyen-Orient ? 
 \begin_inset Newline newline
 \end_inset
 
@@ -315,26 +317,19 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename ModeleE_A.jpg
+	lyxscale 70
+	scale 40
+	rotateOrigin center
 
-\end_layout
+\end_inset
 
-\begin_layout Plain Layout
+
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
 Modèle E/A 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Graphics
-	filename /home/camille/Téléchargements/ModeleE_A(3).png
-	lyxscale 60
-	scale 30
-
-\end_inset
-
-
 \end_layout
 
 \end_inset
@@ -520,8 +515,12 @@ Pour chaque entité, on crée une relation de même nom que l’entité et chaqu
 \begin_inset Newline newline
 \end_inset
 
-Pour les associations 1:n entre A et B: on crée les relations RA et RB correspon
-dant aux entités A et B, l’identifiant de B devient un attribut de RA.
+Pour les associations 
+\series bold
+1:n
+\series default
+ entre A et B, on crée les relations RA et RB correspondant aux entités
+ A et B, l’identifiant de B devient un attribut de RA.
  Une occurrence de A référence l’occurrence de B qui lui est associée à
  l’aide d’une clé étrangère.
 \begin_inset Newline newline
@@ -541,11 +540,15 @@ Ici, on a donc l'identitfiant de Pays qui deviennent des attributs de Armée
 \begin_inset Newline newline
 \end_inset
 
-Ensuite, pour les associations binaires n:n entre A et B: on crée les relations
- RA et RB correspondant aux entités A et B, on crée une relation RAB pour
- l’association, la clé de RA et la clé de RB deviennent des attributs de
- RAB, la clé de cette relation est la concaténation des clés de RA et RB
- et les propriétés de l’association deviennent des attributs de RAB.
+Ensuite, pour les associations binaires 
+\series bold
+n:n
+\series default
+ entre A et B: on crée les relations RA et RB correspondant aux entités
+ A et B, on crée une relation RAB pour l’association, la clé de RA et la
+ clé de RB deviennent des attributs de RAB, la clé de cette relation est
+ la concaténation des clés de RA et RB et les propriétés de l’association
+ deviennent des attributs de RAB.
 \begin_inset Newline newline
 \end_inset
 
@@ -566,10 +569,18 @@ Ainsi pour notre modèle, on crée les relations parler et posséder qui sont
 \begin_inset Newline newline
 \end_inset
 
-En ce qui concerne nos 3 associations ternaires, on atteint une des limites
- du modèle E/A en matière de spécification de contraintes.
- En première approche, on peut appliquer la règle énoncée pour les associations
- binaires généralisées
+En ce qui concerne nos 3 associations ternaires, on peut appliquer la règle
+ énoncée pour les associations binaires généralisées, l'idée est simplement
+ comme pour les relations binaires n:n de créer une realtion RABC avec les
+ clés de chacune des entités (plus éventuellement des attributs spécifiques
+ à la relation comme “Perte en argent” pour guerre.
+\begin_inset Newline newline
+\end_inset
+
+Ici, on crée donc les tables associations : diriger, former et guerre.Ces
+ 3 relations seront donc composés des identifiants des 3 entités composants
+ la relation, d'un identifiant pour l'entité créée en soi (IDFormer, IDDiriger,
+ IDGuerre) et les attributs propres à la relation ternaire en elle-même.
 \begin_inset Newline newline
 \end_inset
 
@@ -617,13 +628,13 @@ Confession (
 \series bold
 IDConfession
 \series default
-, Nom, IDPays, majoritaire (O/N))
+, Nom, majoritaire (O/N))
 \begin_inset Newline newline
 \end_inset
 
 posséder(
 \series bold
-IDPays,IDConfession
+IDPays, IDConfession
 \series default
 )
 \begin_inset Newline newline
@@ -637,23 +648,15 @@ IDCitoyen
 \begin_inset Newline newline
 \end_inset
 
-former (
+former(
 \series bold
-IDAlliance
+IDFormer, 
 \series default
-, 
-\series bold
-IDPays
-\series default
-,
-\series bold
- IDDates
-\series default
-)
+IDAlliance, IDPays, IDDates)
 \begin_inset Newline newline
 \end_inset
 
-Alliance (
+Alliance(
 \series bold
 IDAlliance
 \series default
@@ -661,9 +664,9 @@ IDAlliance
 \begin_inset Newline newline
 \end_inset
 
-Date(
+Dates(
 \series bold
-IDDate
+IDDates
 \series default
 , Date début, Date fin) 
 \begin_inset Newline newline
@@ -671,21 +674,17 @@ IDDate
 
 guerre(
 \series bold
-IDDate
+IDGuerre
 \series default
-s, 
+, Perte en nb d’hommes, Perte en argent
 \series bold
-IDPays
-\series default
 , 
-\series bold
-IDLieu
 \series default
-, Perte en nb d’hommes, Perte en argent)
+IDDates, IDPays, IDLieu)
 \begin_inset Newline newline
 \end_inset
 
-Lieu (
+Lieu(
 \series bold
 IDLieu
 \series default
@@ -693,9 +692,9 @@ IDLieu
 \begin_inset Newline newline
 \end_inset
 
-Date(
+Dates(
 \series bold
-IDDate
+IDDates
 \series default
 , Date début, Date fin) 
 \begin_inset Newline newline
@@ -711,17 +710,9 @@ IDArmée
 
 diriger(
 \series bold
-IDDirigeant
+IDDiriger,
 \series default
-, 
-\series bold
-IDPays
-\series default
-,
-\series bold
- IDDates
-\series default
-)
+ IDDirigeant, IDPays, IDDates)
 \begin_inset Newline newline
 \end_inset
 
@@ -733,9 +724,9 @@ IDDirigeant
 \begin_inset Newline newline
 \end_inset
 
-Date(
+Dates(
 \series bold
-IDDate
+IDDates
 \series default
 , Date début, Date fin) 
 \begin_inset Newline newline
@@ -811,7 +802,7 @@ Confession (
 \series bold
 IDConfession
 \series default
-, Nom, IDPays, majoritaire (O/N))
+, Nom, majoritaire (O/N))
 \begin_inset Newline newline
 \end_inset
 
@@ -827,22 +818,41 @@ Citoyen(
 \series bold
 IDCitoyen
 \series default
-, Nom, Prénom, Nationalité, IDPays)
+, Nom, Prénom, Nationalité, 
+\emph on
+IDPays
+\emph default
+)
+\begin_inset Newline newline
+\end_inset
+
+Armée(
+\series bold
+IDArmée
+\series default
+, Effectif, Nom, type, 
+\emph on
+IDPays
+\emph default
+)
 \begin_inset Newline newline
 \end_inset
 
 former (
 \series bold
-IDAlliance
+IDFormer,
 \series default
-, 
-\series bold
-IDPays
-\series default
+ 
+\emph on
+IDAlliance, IDPays
+\emph default
 ,
 \series bold
- IDDates
+ 
 \series default
+\color green
+Date début, Date fin
+\color inherit
 )
 \begin_inset Newline newline
 \end_inset
@@ -851,11 +861,7 @@ Alliance (
 \series bold
 IDAlliance
 \series default
-, Nom, Type, 
-\color green
-Date début, Date fin
-\color inherit
-)
+, Nom, Type)
 \begin_inset Newline newline
 \end_inset
 
@@ -875,16 +881,12 @@ IDDate
 
 guerre(
 \series bold
-IDDate
+IDGuerre,
 \series default
-s, 
-\series bold
+ 
+\emph on
 IDPays
-\series default
-, 
-\series bold
-IDLieu
-\series default
+\emph default
 , Perte en nb d’hommes, Perte en argent, 
 \color green
 NomLieu, Date début, Date fin)
@@ -921,26 +923,18 @@ IDDate
 \begin_inset Newline newline
 \end_inset
 
-Armée(
-\series bold
-IDArmée
-\series default
-, Effectif, Nom, type, IDPays)
-\begin_inset Newline newline
-\end_inset
-
 diriger(
 \series bold
-IDDirigeant
+IDDiriger,
 \series default
+ 
+\emph on
+IDDirigeant, IDPays
+\emph default
 , 
-\series bold
-IDPays
-\series default
-,
-\series bold
- IDDates
-\series default
+\color green
+Date début, Date fin
+\color inherit
 )
 \begin_inset Newline newline
 \end_inset
@@ -949,11 +943,7 @@ Dirigeant(
 \series bold
 IDDirigeant
 \series default
-, Nom, Prénom, Statut, 
-\color green
-Date début, Date fin
-\color inherit
-) 
+, Nom, Prénom, Statut) 
 \begin_inset Newline newline
 \end_inset
 
@@ -968,18 +958,3498 @@ IDDate
 \strikeout default
 \color inherit
  
-\end_layout
+\begin_inset Newline newline
+\end_inset
 
-\begin_layout Section
-Implémentation de la base de données
+
+\begin_inset Newline newline
+\end_inset
+
+Les clés primaires respectives de chaque entité sont les attributs notés
+ en gras.
+\begin_inset Newline newline
+\end_inset
+
+Les clés étrangères de chaque table sont les notations en italique.
 \end_layout
 
 \begin_layout Section
 Création de la base de données sous mySQL
 \end_layout
 
+\begin_layout Subsection
+Clés primaires et clés étrangères 
+\end_layout
+
+\begin_layout Standard
+Dans notre modèle, les clés primaires respectives de chaque entité sont
+ les attributs notés en gras.
+\begin_inset Newline newline
+\end_inset
+
+Les clés étrangères de chaque table sont les notations en italique.
+\end_layout
+
+\begin_layout Subsection
+Tables à implémenter en mySQL
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+On a donc à présent notre modèle final composé des 12 tables ci-dessous.
+ Il nous reste seulement à l'implémenter en machine.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pays (
+\series bold
+IDPays
+\series default
+, Nom, PIB, IDH, Arme atomique)
+\begin_inset Newline newline
+\end_inset
+
+Langue officielle(
+\series bold
+IDLangue
+\series default
+, Nom)
+\begin_inset Newline newline
+\end_inset
+
+parler(
+\series bold
+IDPays
+\series default
+,
+\series bold
+ IDLangue
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+Confession (
+\series bold
+IDConfession
+\series default
+, Nom, majoritaire (O/N))
+\begin_inset Newline newline
+\end_inset
+
+posséder(
+\series bold
+IDPays,IDConfession
+\series default
+)
+\begin_inset Newline newline
+\end_inset
+
+Citoyen(
+\series bold
+IDCitoyen
+\series default
+, Nom, Prénom, Nationalité, 
+\emph on
+IDPays
+\emph default
+)
+\begin_inset Newline newline
+\end_inset
+
+Armée(
+\series bold
+IDArmée
+\series default
+, Effe
+\color black
+ctif, Nom, type, 
+\emph on
+IDPays
+\emph default
+)
+\begin_inset Newline newline
+\end_inset
+
+former (
+\series bold
+IDFormer,
+\series default
+ 
+\emph on
+IDAlliance, IDPays
+\emph default
+,
+\series bold
+ 
+\series default
+Date début, Date fin)
+\begin_inset Newline newline
+\end_inset
+
+Alliance (
+\series bold
+IDAlliance
+\series default
+, Nom, Type)
+\begin_inset Newline newline
+\end_inset
+
+guerre(
+\series bold
+IDGuerre,
+\series default
+ 
+\emph on
+IDPays
+\emph default
+, Perte en nb d’hommes, Perte en argent, NomLieu, Date début, Date fin)
+\begin_inset Newline newline
+\end_inset
+
+diriger(
+\series bold
+IDDiriger,
+\series default
+ 
+\emph on
+IDDirigeant, IDPays
+\emph default
+, Date début, Date fin)
+\begin_inset Newline newline
+\end_inset
+
+Dirigeant(
+\series bold
+IDDirigeant
+\series default
+, Nom, Prénom, Statut) 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pour les implémenter, on utilise le code ci-dessous :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+CREATE DATABASE Géopolitique; 
+\end_layout
+
+\begin_layout Plain Layout
+
+USE Géopolitique;
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE Pays(
+\end_layout
+
+\begin_layout Plain Layout
+
+                  IDPays INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+				  Nom VARCHAR(50), 	 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  PIB FLOAT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  IDH FLOAT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  Arme_Atomique BOOL, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  PRIMARY KEY(IDPays));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE Langue_Officielle(
+\end_layout
+
+\begin_layout Plain Layout
+
+                               IDLangue INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                               Nom VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                               PRIMARY KEY(IDLangue)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE parler( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    IDPays INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    IDLangue INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    PRIMARY KEY(IDLangue, IDPays));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE Confession( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                        IDConfession INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                        Nom VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                        majoritaire BOOL, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                        PRIMARY KEY(IDConfession));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE posséder( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     IDPays INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     IDConfession INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     PRIMARY KEY(IDConfession, IDPays)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE Citoyens( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     IDCitoyens INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     Nom VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     Prénom VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     Nationalité VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     IDPays INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     PRIMARY KEY(IDCitoyens), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE Armée( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  IDArmée INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                   Effectif INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  Nom VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    Type VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  IDPays INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                PRIMARY KEY(IDArmée), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                   FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE former( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                   IDFormer INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  IDAlliance INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  IDPays INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     DateDébut DATE, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                   DateFin DATE, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                   PRIMARY KEY(IDFormer), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                  FOREIGN KEY(IDAlliance) REFERENCES Alliance(IDAlliance),
+ 	               FOREIGN KEY(IDPays) REFERENCES Pays(IDPays)); 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE Alliance( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     IDAlliance INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     Nom VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                      Type VARCHAR(50), 	 
+\end_layout
+
+\begin_layout Plain Layout
+
+                      PRIMARY KEY(IDAlliance));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE guerre( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    IDGuerre INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    IDPays INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     Perte_en_nombres_d_hommes INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    Perte_en_argent INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    NomLieu VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     DateDébut DATE, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    DateFin DATE, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    PRIMARY KEY(IDGuerre), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE Dirigeant( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                       IDDirigeant INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                       Nom VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                       Prénom VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                       Statut VARCHAR(50), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                       PRIMARY KEY(IDDirigeant));
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+CREATE TABLE diriger( 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    IDDiriger INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                       IDDirigeant INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                      IDPays INT, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     DateDébut DATE, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     DateFin DATE, 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                     PRIMARY KEY(IDDiriger), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                      FOREIGN KEY(IDDirigeant) REFERENCES 		Dirigeant(IDDirigean
+t), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+                    FOREIGN KEY(IDPays) REFERENCES Pays(IDPays)); 	
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+IMPLÉMENTATION DES TABLES mySQL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\emph on
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Remarque
+\emph default
+ : Comme vous pouvez le constater dans le code ci-dessus, j'ai utilisé plusieurs
+ fois le type bool qui n'existe pas à proprement parler dans mySQL, la valeur
+ sera en fait stockée comme une variable de type TINYINT propre à mySQL.
+ Et, par quelques lignes de commande que nous verrons plus bas, nous assignerons
+ le 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+0
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ à 
+\emph on
+false
+\emph default
+ et le 
+\begin_inset Quotes eld
+\end_inset
+
+
+\emph on
+1
+\emph default
+
+\begin_inset Quotes erd
+\end_inset
+
+ (plus généralement tout nombre non nul) à 
+\emph on
+true
+\emph default
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+INSERT INTO Pays(IDPays,Nom ,PIB, IDH, Arme_Atomique) 
+\end_layout
+
+\begin_layout Plain Layout
+
+VALUES(1,"Afrique du Sud",819.093,0.705,0), 
+\end_layout
+
+\begin_layout Plain Layout
+
+(2,"Australie",1095,0.939,0), 
+\end_layout
+
+\begin_layout Plain Layout
+
+(3,"Bangladesh",687.1,0.614,0), 
+\end_layout
+
+\begin_layout Plain Layout
+
+(4,"Cameroun",40.13,0.590,0), 
+\end_layout
+
+\begin_layout Plain Layout
+
+(5,"Canada",1631.943,0.926,0), 
+\end_layout
+
+\begin_layout Plain Layout
+
+(6,"Inde",7965.162,0.926,1), 
+\end_layout
+
+\begin_layout Plain Layout
+
+(7,"Royaume-Uni",3009.325,0.924,1),
+\end_layout
+
+\begin_layout Plain Layout
+
+(8, "Brésil", 3263.832, 0.759, 0), 
+\end_layout
+
+\begin_layout Plain Layout
+
+(9, "Russie", 4349.420, 0.824, 1), 
+\end_layout
+
+\begin_layout Plain Layout
+
+(10, "Chine", 23393, 0.761, 1);
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+IMPLÉMENTATION DE LA BASE DE DONNÉES
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Remarques : 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Les commandes DAY(date) , MONTH(date) , YEAR(date) permettent d'extraire
+ le jour, le mois ou l'année d'une date.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pour le PIB, on utilise le PIB(PPA = parité de pouvoir d'achat).
+ C'est une méthode utilisée en économie pour établir une comparaison, entre
+ pays, du pouvoir d'achat des devises nationales, ce qu’une simple utilisation
+ des taux de change ne permet pas de faire.
+ 
+\end_layout
+
 \begin_layout Section
 Requêtes SQL
+\end_layout
+
+\begin_layout Subsection
+Requête 1
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+1) Quels pays composent l’union commerciale du Commonwealth (dont le dénominateu
+r commun est l’ancien empire britannique et donc sa langue) ?
+\series default
+ (liste non exhaustive) 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\color red
+(requête avec une jointure simple)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ALGEBRE RELATIONNEL
+\color inherit
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT p.Nom AS Nom_Pays
+\begin_inset Newline newline
+\end_inset
+
+FROM Pays AS p
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN former AS f ON f.IDPays = p.IDPays
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Alliance AS a ON a.IDAlliance = f.IDAlliance
+\begin_inset Newline newline
+\end_inset
+
+WHERE a.Nom = 'Commonwealth';
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete1.png
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête n°1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+2) Trier par ordre croissant les IDH des membres de l'alliance économique
+ BRICS (ORDER BY + jointure Pays Alliance)
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\color red
+
+\begin_inset Newline newline
+\end_inset
+
+ALGEBRE RELATIONNEL
+\color inherit
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT p.Nom AS Nom_Pays, IDH
+\begin_inset Newline newline
+\end_inset
+
+FROM Pays AS p
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN former AS f ON f.IDPays = p.IDPays
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Alliance AS a ON a.IDAlliance = f.IDAlliance
+\begin_inset Newline newline
+\end_inset
+
+WHERE a.Nom='BRICS'
+\begin_inset Newline newline
+\end_inset
+
+ORDER BY IDH;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete2.png
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête n°2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+3) Quelles sont les confessions présentes dans un conflit donné? ( requête
+ jointure avec 2 fois la même table)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+A FAIRE 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+4) Lister les pays qui contiennent plus de 4 habitants.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\emph on
+Remarque : Requête peu utile mais on a choisi un sujet qui requiert une
+ base de données gigantesque pour s'approcher de la réalité donc on doit
+ de contenter de petites valeurs.
+ Mais le principe est le même
+\emph default
+.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT p.Nom AS Nom_Pays
+\begin_inset Newline newline
+\end_inset
+
+FROM Pays AS p
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Citoyens AS c ON c.IDPays = p.IDPays
+\begin_inset Newline newline
+\end_inset
+
+GROUP BY p.IDPays 
+\begin_inset Newline newline
+\end_inset
+
+HAVING COUNT(IDCitoyens) > 4;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete4.png
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête n°4
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+5) Sélectionner la nationalité majoritaire des citoyens d'un pays qui n'ont
+ pas la nationalité de ce pays.
+\begin_inset Newline newline
+\end_inset
+
+Quelle est la nationalité majoritaire parmi les étrangers résidant en France
+ ?)
+\series default
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT DISTINCT Nationalité, COUNT(IDCitoyens) 
+\begin_inset Newline newline
+\end_inset
+
+FROM Citoyens AS c 
+\begin_inset Newline newline
+\end_inset
+
+WHERE Nationalité <> 'France'
+\begin_inset Newline newline
+\end_inset
+
+GROUP BY Nationalité
+\begin_inset Newline newline
+\end_inset
+
+ORDER BY COUNT(IDCitoyens) DESC
+\begin_inset Newline newline
+\end_inset
+
+LIMIT 1;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\emph on
+Remarques : -LIMIT i permet de restreindre au nombre indiqué i les résultats
+ de la requête qui vient d'être tapée.
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+- ORDER BY ....
+ DESC permet un tri dan l'ordre décroissant
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+6) Sélectionner les pays qui ne font pas partie de l'OTAN.
+
+\series default
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+(SELECT Pays NOT IN) 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT p.Nom AS Nom_Pays 
+\begin_inset Newline newline
+\end_inset
+
+FROM Pays AS p
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN former AS f ON f.IDPays = p.IDPays
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Alliance AS a ON a.IDAlliance = f.IDAlliance
+\begin_inset Newline newline
+\end_inset
+
+NOT IN (SELECT p.Nom AS Nom_Pays FROM Pays
+\begin_inset Newline newline
+\end_inset
+
+WHERE a.Nom = 'OTAN');
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\series bold
+7) Sélectionner les pays qui contiennent un 
+\begin_inset Quotes eld
+\end_inset
+
+e
+\begin_inset Quotes erd
+\end_inset
+
+ dans leur nom.
+ 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\emph on
+Remarque
+\emph default
+ : Nous voulions construire une requête utilisant CONTAINS mais nous n'avons
+ pas trouvé de réelle documentation sur celle-ci donc nous sommes passés
+ par un autre outil qui affiche la même chose : LIKE ‘%a%’.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Ce modèle est utilisé pour rechercher tous les enregistrement qui utilisent
+ le caractère « a ».
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT p.Nom AS Nom_Pays 
+\begin_inset Newline newline
+\end_inset
+
+FROM Pays AS p
+\begin_inset Newline newline
+\end_inset
+
+WHERE p.Nom LIKE '%e%';
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+8) Liste des pays qui font partie de toutes les alliances.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\text{\ensuremath{\pi}}Pays(former)\text{–}{Pays/\text{\ensuremath{\exists}}Alliance,\text{\ensuremath{\neg}}former(Alliance,Pays)}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Pour la requête SQL, il nous faut reformuler la question en utilisant une
+ phrase avec une double négation :
+\begin_inset Newline newline
+\end_inset
+
+Quels sont les pays pour lesquelles il n’existe pas d'alliance dont ils
+ ne font pas partie ?
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+PAS SUR DE CETTE REQUETE :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT DISTINCT Pays.Nom AS NomPays 
+\begin_inset Newline newline
+\end_inset
+
+FROM Pays AS p, Alliance AS a
+\begin_inset Newline newline
+\end_inset
+
+WHERE NOT EXISTS (SELECT * 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+FROM a
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+WHERE NOT EXISTS (SELECT * 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+FROM a
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+INNER JOIN former AS f
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+WHERE a.IDAlliance = f.IDAlliance
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+AND f.IDPays = p.IDPays));
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+9) Lister tous les présidents de la 
+\begin_inset Formula $V^{e}$
+\end_inset
+
+République en France à partir de 1995.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT Dirigeant.Nom AS Nom, Dirigeant.Prénom AS Prénom, DateDébut AS DD,
+ DateFin AS DF
+\begin_inset Newline newline
+\end_inset
+
+FROM Dirigeant AS d
+\begin_inset Newline newline
+\end_inset
+
+JOIN diriger AS dir
+\begin_inset Newline newline
+\end_inset
+
+JOIN Pays AS p
+\begin_inset Newline newline
+\end_inset
+
+WHERE Statut= 
+\begin_inset Quotes eld
+\end_inset
+
+président
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+AND Pays.Nom = 
+\begin_inset Quotes eld
+\end_inset
+
+France
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+AND DD>= 1995
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+10) 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+11)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+12) 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+13) Message à afficher selon l'effectif d'une armée pour un pays 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT * 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+CASE 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+WHEN Effectif=0 THEN 'Pas d'armée'
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+WHEN Effectif<50000 THEN 'Effectif faible' 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+ELSE 'Effectif élévé' 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+END
+\begin_inset Newline newline
+\end_inset
+
+FROM Armée
 \end_layout
 
 \end_body

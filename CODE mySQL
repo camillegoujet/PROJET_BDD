@@ -1,0 +1,173 @@
+CREATE DATABASE Géopolitique;
+USE Géopolitique;
+
+CREATE TABLE Pays(
+	IDPays INT,
+	Nom VARCHAR(50),
+	PIB FLOAT,
+	IDH FLOAT,
+	Arme_Atomique BOOL,
+	PRIMARY KEY(IDPays));
+	
+CREATE TABLE Langue_Officielle(
+	IDLangue INT,
+	Nom VARCHAR(50),
+	PRIMARY KEY(IDLangue));
+	
+CREATE TABLE parler(
+	IDPays INT,
+	IDLangue INT,
+	PRIMARY KEY(IDLangue, IDPays));
+	
+CREATE TABLE Confession(
+	IDConfession INT,
+	Nom VARCHAR(50),
+	majoritaire BOOL,
+	PRIMARY KEY(IDConfession));
+	
+CREATE TABLE posséder(
+	IDPays INT,
+	IDConfession INT,
+	PRIMARY KEY(IDConfession, IDPays));
+	
+CREATE TABLE Citoyens(
+	IDCitoyens INT,
+	Nom VARCHAR(50),
+	Prénom VARCHAR(50),
+	Nationalité VARCHAR(50),
+	IDPays INT,
+	PRIMARY KEY(IDCitoyens),
+	FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+	
+CREATE TABLE Armée(
+	IDArmée INT,
+	Effectif INT,
+	Nom VARCHAR(50),
+	Type VARCHAR(50),
+	IDPays INT,
+	PRIMARY KEY(IDArmée),
+	FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+	
+	CREATE TABLE former(
+	IDFormer INT,
+	IDAlliance INT,
+	IDPays INT,
+	DateDébut DATE,
+	DateFin DATE,
+	PRIMARY KEY(IDFormer),
+	FOREIGN KEY(IDAlliance) REFERENCES Alliance(IDAlliance),
+	FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+	
+	CREATE TABLE Alliance(
+	IDAlliance INT,
+	Nom VARCHAR(50),
+	Type VARCHAR(50),
+	PRIMARY KEY(IDAlliance));
+
+	CREATE TABLE guerre(
+	IDGuerre INT,
+	IDPays INT,
+	Perte_en_nombres_d_hommes INT,
+	Perte_en_argent INT,
+	NomLieu VARCHAR(50),
+	DateDébut DATE,
+	DateFin DATE,
+	PRIMARY KEY(IDGuerre),
+	FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+	
+	CREATE TABLE Dirigeant(
+	IDDirigeant INT,
+	Nom VARCHAR(50),
+	Prénom VARCHAR(50),
+	Statut VARCHAR(50),
+	PRIMARY KEY(IDDirigeant));
+	
+	CREATE TABLE diriger(
+	IDDiriger INT,
+	IDDirigeant INT,
+	IDPays INT,
+	DateDébut DATE,
+	DateFin DATE,
+	PRIMARY KEY(IDDiriger),
+	FOREIGN KEY(IDDirigeant) REFERENCES Dirigeant(IDDirigeant),
+	FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+	
+	//IMPLÉMENTATION DE LA BASE DE DONNÉES
+	
+INSERT INTO Pays(IDPays,Nom ,PIB, IDH, Arme_Atomique)
+VALUES
+//REQUETE1
+(1,"Afrique du Sud",819.093,0.705,0),
+(2,"Australie",1095,0.939,0),
+(3,"Bangladesh",687.1,0.614,0),
+(4,"Cameroun",40.13,0.590,0),
+(5,"Canada",1631.943,0.926,0),
+(6,"Inde",7965.162,0.926,1),
+(7,"Royaume-Uni",3009.325,0.924,1),
+//REQUETE2
+(8, "Brésil", 3263.832, 0.759, 0),
+(9, "Russie", 4349.420, 0.824, 1),
+(10, "Chine", 23393, 0.761, 1)   //jusque là c entré en sql
+//requete 4
+(11, "France", 2962.799, 0.901, 1),
+(12, "Espagne",  1615.074, 0.893, 0);
+(13, "Etats-Unis", 17947, 0.924, 1),
+(14, "Norvège", 322.101 , 0.954, 0),
+(15, "Allemagne", 3840.55, 0.939, 0);
+	
+	
+	
+INSERT INTO Alliance(IDAlliance, Nom, Type)
+VALUES	
+(1, "Commonwealth", "économique"),
+(2, "BRICS", "économique"),
+(3, "OTAN", "militaire");
+	
+	
+INSERT INTO former(IDFormer,IDAlliance,IDPays,DateDébut,DateFin)	
+VALUES (1, 1, 1, '1926-11-19', NOW()),
+(2, 1, 2, '1926-11-19', NOW()), 
+(3, 1, 3, '1972-04-18', NOW()),
+(4, 1, 4, '1995-11-13', NOW()),
+(5, 1, 5, '1926-11-19', NOW()),
+(6, 1, 6, '1947-08-15', NOW()),
+(7, 1, 7, '1926-11-19', NOW()),
+(8, 2, 1, '2011-01-01', NOW()),
+(9, 2, 6, '2009-01-01', NOW()),
+(10, 2, 8, '2009-01-01', NOW()),
+(11, 2, 9, '2009-01-01', NOW()),
+(12, 2, 10, '2009-01-01', NOW()),
+(13, 3, 13, '1949-04-04',NOW()), 
+(14, 3, 14, '1949-04-04',NOW()), 
+(15, 3, 15,'1955-05-06', NOW()),
+(16, 3, 11, '1949-04-04',NOW());
+
+
+INSERT INTO Citoyens(IDCitoyens, Nom, Prénom, Nationalité, IDPays)
+VALUES (1, "GOUJET", "Camille", "France", 11),
+(2, "NODET", "Emeric", "France", 11),
+(3, "BECKER", "Lucas", "France", 11),
+(4, "BAGARD", "Sarah", "Russie", 9),
+(5, "APOLLAIRE", "Marie", "France", 11),
+(6, "JANDIN", "Julie", "France", 11),
+(7, "MAIER", "Flora", "France", 11),
+(8, "DIDON", "Maya", "Espagne", 11),	
+(9, "CRUZ", "Penelope","Espagne", 12); 
+	
+	
+	
+	
+	
+	
+	//REQUETE 1 SQL
+	Liste des pays du Commonwealth (non exhaustif)
+	
+	1, Afrique du Sud, 819,093 (milliards de $), 0,705, 
+	Australie
+	Bangladesh
+	Cameroun
+	Canada
+	Inde
+	Royaume-Uni
+	
+
