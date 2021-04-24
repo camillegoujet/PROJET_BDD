@@ -41,6 +41,7 @@ InStar
 \output_sync 0
 \bibtex_command default
 \index_command default
+\float_placement H
 \paperfontsize default
 \spacing single
 \use_hyperref true
@@ -312,6 +313,7 @@ Nous allons donc modéliser ces relations internationales de la façon suivante
 
 
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -348,21 +350,15 @@ Modèle E/A
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Subsection
 
 \series bold
 Justification des cardinalités : 
-\series default
+\end_layout
 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
+\begin_layout Standard
 Dans cette partie, nous allons tenter d'expliquer les cardinalités que nous
  avons choisi d'inscrire sur notre modèle Entités/Associations afin de les
  rendre plus claires.
@@ -762,6 +758,10 @@ ons former, diriger, et guerre.
 \begin_inset Newline newline
 \end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
 Donc le modèle relationnel devient :
 \begin_inset Newline newline
 \end_inset
@@ -973,6 +973,13 @@ Les clés primaires respectives de chaque entité sont les attributs notés
 Les clés étrangères de chaque table sont les notations en italique.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Création de la base de données sous mySQL
 \end_layout
@@ -1138,11 +1145,24 @@ IDDirigeant
 \begin_inset Newline newline
 \end_inset
 
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
 Pour les implémenter, on utilise le code ci-dessous :
 \end_layout
 
 \begin_layout Standard
 \begin_inset Float algorithm
+placement H
 wide false
 sideways false
 status open
@@ -1348,6 +1368,52 @@ CREATE TABLE Citoyens(
 
 \begin_layout Plain Layout
 
+ 	
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+IMPLÉMENTATION DES TABLES mySQL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\emph on
+
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
 CREATE TABLE Armée( 	
 \end_layout
 
@@ -1378,16 +1444,12 @@ CREATE TABLE Armée(
 
 \begin_layout Plain Layout
 
-                PRIMARY KEY(IDArmée), 	
+PRIMARY KEY(IDArmée), 	
 \end_layout
 
 \begin_layout Plain Layout
 
-                   FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
-\end_layout
-
-\begin_layout Plain Layout
-
+FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
 \end_layout
 
 \begin_layout Plain Layout
@@ -1511,12 +1573,49 @@ CREATE TABLE guerre(
 
 \begin_layout Plain Layout
 
-                     FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
 \end_layout
 
 \begin_layout Plain Layout
 
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\emph on
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+IMPLÉMENTATION DES TABLES mySQL
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset listings
+inline false
+status open
 
 \begin_layout Plain Layout
 
@@ -1559,7 +1658,7 @@ CREATE TABLE diriger(
 
 \begin_layout Plain Layout
 
-                    IDDiriger INT, 	
+IDDiriger INT, 	
 \end_layout
 
 \begin_layout Plain Layout
@@ -1595,7 +1694,11 @@ t),
 
 \begin_layout Plain Layout
 
-                    FOREIGN KEY(IDPays) REFERENCES Pays(IDPays)); 	
+FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \end_inset
@@ -1604,6 +1707,8 @@ t),
 \end_layout
 
 \begin_layout Plain Layout
+
+\emph on
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -1622,9 +1727,7 @@ IMPLÉMENTATION DES TABLES mySQL
 \end_inset
 
 
-\emph on
-
-\begin_inset Newline newline
+\begin_inset Newpage newpage
 \end_inset
 
 
@@ -1679,6 +1782,7 @@ true
 
 
 \begin_inset Float algorithm
+placement H
 wide false
 sideways false
 status open
@@ -1756,7 +1860,7 @@ VALUES(1,"Afrique du Sud",819.093,0.705,0),
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-IMPLÉMENTATION DE LA BASE DE DONNÉES
+EXEMPLE D'IMPLÉMENTATION DE LA BASE DE DONNÉES
 \end_layout
 
 \end_inset
@@ -1774,28 +1878,40 @@ IMPLÉMENTATION DE LA BASE DE DONNÉES
 \end_layout
 
 \begin_layout Standard
+
+\emph on
 Remarques : 
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
+
+\emph on
 Les commandes DAY(date) , MONTH(date) , YEAR(date) permettent d'extraire
  le jour, le mois ou l'année d'une date.
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
+
+\emph on
 Pour le PIB, on utilise le PIB(PPA = parité de pouvoir d'achat).
  C'est une méthode utilisée en économie pour établir une comparaison, entre
  pays, du pouvoir d'achat des devises nationales, ce qu’une simple utilisation
  des taux de change ne permet pas de faire.
  
+\begin_inset Newline newline
+\end_inset
+
+
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1813,27 +1929,7 @@ Requête 1
 r commun est l’ancien empire britannique et donc sa langue) ?
 \series default
  (liste non exhaustive) 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
 \color red
-(requête avec une jointure simple)
-\begin_inset Newline newline
-\end_inset
-
 
 \begin_inset Newline newline
 \end_inset
@@ -1842,9 +1938,24 @@ r commun est l’ancien empire britannique et donc sa langue) ?
 \begin_inset Newline newline
 \end_inset
 
-ALGEBRE RELATIONNEL
+
 \color inherit
+La formule d'algèbre relationnelle est :
+\end_layout
 
+\begin_layout Standard
+\begin_inset Formula $\pi_{Pays.Nom}(\sigma_{a.Nom="Commonwealth"}(Pays\infty former\infty Alliance))$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
@@ -1878,6 +1989,7 @@ WHERE a.Nom = 'Commonwealth';
 
 
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1885,6 +1997,8 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename requete1.png
+	lyxscale 50
+	scale 50
 	rotateOrigin center
 
 \end_inset
@@ -1915,9 +2029,13 @@ Résultat de la requête n°1
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Subsection
+Requête 2
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 2) Trier par ordre croissant les IDH des membres de l'alliance économique
@@ -1931,15 +2049,27 @@ Résultat de la requête n°1
 \begin_inset Newline newline
 \end_inset
 
-
+La formule d'algèbre relationnelle est :
 \color red
 
 \begin_inset Newline newline
 \end_inset
 
-ALGEBRE RELATIONNEL
+
 \color inherit
 
+\begin_inset Formula $\pi_{Pays.Nom}(\sigma_{a.Nom="BRICS"}(Pays\infty former\infty Alliance))$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
@@ -1977,6 +2107,7 @@ ORDER BY IDH;
 
 
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1984,6 +2115,8 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename requete2.png
+	lyxscale 50
+	scale 50
 	rotateOrigin center
 
 \end_inset
@@ -2014,11 +2147,19 @@ Résultat de la requête n°2
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Subsection
+Requête 3
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 3) Quelles sont les confessions présentes dans un conflit donné? ( requête
  jointure avec 2 fois la même table)
+\series default
+
 \begin_inset Newline newline
 \end_inset
 
@@ -2034,8 +2175,40 @@ A FAIRE
 \begin_inset Newline newline
 \end_inset
 
+La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{Confession.Nom}(\sigma_{guerre.IDGuerre=x}(guerre\infty Pays\infty Confession))$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Requête 4
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 4) Lister les pays qui contiennent plus de 4 habitants.
  
+\series default
+
 \begin_inset Newline newline
 \end_inset
 
@@ -2051,6 +2224,30 @@ Remarque : Requête peu utile mais on a choisi un sujet qui requiert une
  Mais le principe est le même
 \emph default
 .
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{Pays.Nom}(\sigma_{COUNT(IDCitoyen)>4}(Pays\infty Citoyen))$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
@@ -2091,6 +2288,8 @@ status open
 \begin_layout Plain Layout
 \begin_inset Graphics
 	filename requete4.png
+	lyxscale 50
+	scale 50
 	rotateOrigin center
 
 \end_inset
@@ -2121,9 +2320,13 @@ Résultat de la requête n°4
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Subsection
+Requête 5
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 5) Sélectionner la nationalité majoritaire des citoyens d'un pays qui n'ont
@@ -2139,6 +2342,26 @@ Quelle est la nationalité majoritaire parmi les étrangers résidant en France
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{Nationalité,COUNT(IDCitoyen)}(\sigma_{Nationalité<>"France"}(Citoyen))$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
@@ -2277,9 +2500,85 @@ Remarques : -LIMIT i permet de restreindre au nombre indiqué i les résultats
 \end_inset
 
 
-\begin_inset Newline newline
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete5.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 5
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete5_bis.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 5 bis
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Requête 6
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 6) Sélectionner les pays qui ne font pas partie de l'OTAN.
@@ -2293,7 +2592,23 @@ Remarques : -LIMIT i permet de restreindre au nombre indiqué i les résultats
 \begin_inset Newline newline
 \end_inset
 
-(SELECT Pays NOT IN) 
+La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{Pays.Nom}(Pays)-\pi_{Pays.Nom}(\sigma_{a.Nom="OTAN"}(Pays\infty former\infty Alliance))$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
@@ -2305,23 +2620,35 @@ SELECT p.Nom AS Nom_Pays
 \begin_inset Newline newline
 \end_inset
 
-FROM Pays AS p
+FROM Pays as p 
 \begin_inset Newline newline
 \end_inset
 
-INNER JOIN former AS f ON f.IDPays = p.IDPays
+WHERE p.Nom 
 \begin_inset Newline newline
 \end_inset
 
-INNER JOIN Alliance AS a ON a.IDAlliance = f.IDAlliance
+NOT IN 
 \begin_inset Newline newline
 \end_inset
 
-NOT IN (SELECT p.Nom AS Nom_Pays FROM Pays
+(SELECT p.Nom 
 \begin_inset Newline newline
 \end_inset
 
-WHERE a.Nom = 'OTAN');
+FROM Pays as p 
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN former AS f ON f.IDPays = p.IDPays 
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Alliance AS a ON a.IDAlliance = f.IDAlliance 
+\begin_inset Newline newline
+\end_inset
+
+WHERE a.Nom = 'OTAN'); 
 \begin_inset Newline newline
 \end_inset
 
@@ -2329,6 +2656,47 @@ WHERE a.Nom = 'OTAN');
 \begin_inset Newline newline
 \end_inset
 
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename REQUETE6.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 6
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Requête 7
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 7) Sélectionner les pays qui contiennent un 
@@ -2370,6 +2738,14 @@ Ce modèle est utilisé pour rechercher tous les enregistrement qui utilisent
 \begin_inset Newline newline
 \end_inset
 
+La requête SQL à entrer en machine est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
 SELECT p.Nom AS Nom_Pays 
 \begin_inset Newline newline
 \end_inset
@@ -2387,10 +2763,62 @@ WHERE p.Nom LIKE '%e%';
 \end_inset
 
 
-\begin_inset Newline newline
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete7.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
 \end_inset
 
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Requête 8
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 8) Liste des pays qui font partie de toutes les alliances.
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+A REVOIR!!!!!!!!!!
 \begin_inset Newline newline
 \end_inset
 
@@ -2399,7 +2827,15 @@ WHERE p.Nom LIKE '%e%';
 \end_inset
 
 
-\begin_inset Formula $\text{\ensuremath{\pi}}Pays(former)\text{–}{Pays/\text{\ensuremath{\exists}}Alliance,\text{\ensuremath{\neg}}former(Alliance,Pays)}$
+\begin_inset Newline newline
+\end_inset
+
+La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{Pays.Nom}(Pays-\sigma_{a.Nom=NULL}(Pays\infty former\infty Alliance))$
 \end_inset
 
 
@@ -2411,27 +2847,15 @@ WHERE p.Nom LIKE '%e%';
 \end_inset
 
 Pour la requête SQL, il nous faut reformuler la question en utilisant une
- phrase avec une double négation :
-\begin_inset Newline newline
-\end_inset
-
+ phrase avec une double négation : 
+\emph on
 Quels sont les pays pour lesquelles il n’existe pas d'alliance dont ils
  ne font pas partie ?
 \begin_inset Newline newline
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-PAS SUR DE CETTE REQUETE :
-\begin_inset Newline newline
-\end_inset
-
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -2440,11 +2864,15 @@ PAS SUR DE CETTE REQUETE :
 \begin_inset Newline newline
 \end_inset
 
+La requête SQL à entrer en machine est :
+\begin_inset Newline newline
+\end_inset
+
 
 \begin_inset Newline newline
 \end_inset
 
-SELECT DISTINCT Pays.Nom AS NomPays 
+SELECT DISTINCT p.Nom AS NomPays 
 \begin_inset Newline newline
 \end_inset
 
@@ -2452,7 +2880,7 @@ FROM Pays AS p, Alliance AS a
 \begin_inset Newline newline
 \end_inset
 
-WHERE NOT EXISTS (SELECT * 
+WHERE NOT EXISTS (SELECT Nom 
 \begin_inset Newline newline
 \end_inset
 
@@ -2764,7 +3192,7 @@ FROM a
 \begin_inset space ~
 \end_inset
 
-WHERE NOT EXISTS (SELECT * 
+WHERE NOT EXISTS (SELECT p.Nom 
 \begin_inset Newline newline
 \end_inset
 
@@ -3076,7 +3504,7 @@ WHERE NOT EXISTS (SELECT *
 \begin_inset space ~
 \end_inset
 
-FROM a
+FROM p
 \begin_inset Newline newline
 \end_inset
 
@@ -3388,7 +3816,7 @@ FROM a
 \begin_inset space ~
 \end_inset
 
-INNER JOIN former AS f
+INNER JOIN former AS f ON f.IDPays = p.IDPays
 \begin_inset Newline newline
 \end_inset
 
@@ -3700,380 +4128,27 @@ INNER JOIN former AS f
 \begin_inset space ~
 \end_inset
 
-WHERE a.IDAlliance = f.IDAlliance
+INNER JOIN Alliance ON a.IDAlliance = f.IDAlliance));
 \begin_inset Newline newline
 \end_inset
 
 
-\begin_inset space ~
-\end_inset
+\end_layout
 
+\begin_layout Subsection
+Requête 9
+\end_layout
 
-\begin_inset space ~
-\end_inset
+\begin_layout Standard
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-AND f.IDPays = p.IDPays));
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
+\series bold
 9) Lister tous les présidents de la 
 \begin_inset Formula $V^{e}$
 \end_inset
 
 République en France à partir de 1995.
-\begin_inset Newline newline
-\end_inset
+\series default
 
-
-\begin_inset Newline newline
-\end_inset
-
-SELECT Dirigeant.Nom AS Nom, Dirigeant.Prénom AS Prénom, DateDébut AS DD,
- DateFin AS DF
-\begin_inset Newline newline
-\end_inset
-
-FROM Dirigeant AS d
-\begin_inset Newline newline
-\end_inset
-
-JOIN diriger AS dir
-\begin_inset Newline newline
-\end_inset
-
-JOIN Pays AS p
-\begin_inset Newline newline
-\end_inset
-
-WHERE Statut= 
-\begin_inset Quotes eld
-\end_inset
-
-président
-\begin_inset Quotes erd
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-AND Pays.Nom = 
-\begin_inset Quotes eld
-\end_inset
-
-France
-\begin_inset Quotes erd
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-AND DD>= 1995
 \begin_inset Newline newline
 \end_inset
 
@@ -4081,24 +4156,12 @@ AND DD>= 1995
 \begin_inset Newline newline
 \end_inset
 
-10) 
+La formule d'algèbre relationnelle est :
 \begin_inset Newline newline
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
-
-11)
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-12) 
-\begin_inset Newline newline
+\begin_inset Formula $\pi_{d.Nom,d.Prénom,DD,DF}(\sigma_{Statut="président",Pays.Nom="France",DD>=1995}(Pays\infty diriger\infty Dirigeant))$
 \end_inset
 
 
@@ -4109,7 +4172,478 @@ AND DD>= 1995
 \begin_inset Newline newline
 \end_inset
 
+La requête SQL à entrer en machine est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT DISTINCT d.Nom AS Nom, d.Prénom AS Prénom, DateDébut AS DD, DateFin
+ AS DF 
+\begin_inset Newline newline
+\end_inset
+
+FROM Dirigeant AS d 
+\begin_inset Newline newline
+\end_inset
+
+inner JOIN diriger AS dir on d.IDDirigeant=dir.IDDirigeant 
+\begin_inset Newline newline
+\end_inset
+
+inner JOIN Pays AS p on p.IDPays=dir.IDPays 
+\begin_inset Newline newline
+\end_inset
+
+WHERE Statut='président' AND p.Nom = 'France' 
+\begin_inset Newline newline
+\end_inset
+
+AND dir.DateDébut >='1995 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete9.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 9
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Requête 10
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+10) Parmi les pays de l'UE, quels sont les pays qui parlent anglais ?
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{Pays.Nom}(\sigma_{Langue.Nom="anglais"}((\sigma_{a.Nom="UE"}(Pays\infty former\infty Alliance))\infty Langue))$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT p.Nom AS NomPays FROM Pays AS p 
+\begin_inset Newline newline
+\end_inset
+
+WHERE p.Nom 
+\begin_inset Newline newline
+\end_inset
+
+IN
+\begin_inset Newline newline
+\end_inset
+
+(SELECT p.Nom FROM Pays AS p 
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN parler AS p ar ON par.IDPays = p.IDPays 
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Langue_Officielle AS l ON l.IDLangue = par.IDLangue 
+\begin_inset Newline newline
+\end_inset
+
+WHERE l.Nom = 'anglais'); 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename prérequete10.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Table contenant tous les pays et leur langue officielle
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete10.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 10
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Requête 11
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+11) Nombre d'habitants des pays avec bombe atomique
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{COUNT(IDCitoyen)}((\sigma_{ArmeAtomique=1}(Pays))\infty Citoyen)$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+SELECT p.Nom AS NomPays, COUNT(IDCitoyens) FROM Pays AS p 
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Citoyens AS c ON c.IDPays = p.IDPays 
+\begin_inset Newline newline
+\end_inset
+
+WHERE p.Arme_Atomique = 1 
+\begin_inset Newline newline
+\end_inset
+
+GROUP BY p.IDPays;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename prerequete11.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Liste des pays possédant l'arme atomique
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete11.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 11
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\emph on
+Remarque : Ici, dans le résultat de la requête, on ne retrouve que la Russie
+ et la France simplement parce que l'on a choisi de ne pas faire figurer
+ de citoyens de Chine, Inde, Royaume-Uni, et des USA par soucis de simplicité.
+\end_layout
+
+\begin_layout Subsection
+Requête 12
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+12) Les armées présentes dans les guerres des pays chiites en 2018 (=les
+ armées des pays en partie au moins chiites en guerre en 2018)
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+A FAIRE SVP (ENTRER LIGNES QU'IL FAUT DANS FICHIER CODE SQL ET REQUETE)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{Armée.Nom}((\sigma_{DD<2018,DF>2018}(Guerre\infty Pays))X(\sigma_{c.Nom="chiite"}(Confession\infty posséder\infty Pays)))$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La requête SQL à entrer en machine est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 12
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Requête 13 
+\end_layout
+
+\begin_layout Standard
+
+\series bold
 13) Message à afficher selon l'effectif d'une armée pour un pays 
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La formule d'algèbre relationnelle est :
 \begin_inset Newline newline
 \end_inset
 
@@ -4117,339 +4651,79 @@ AND DD>= 1995
 \begin_inset Newline newline
 \end_inset
 
-SELECT * 
+La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
 
-\begin_inset space ~
+\begin_inset Newline newline
 \end_inset
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
+SELECT *
+\begin_inset Newline newline
 \end_inset
 
 CASE 
 \begin_inset Newline newline
 \end_inset
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
 WHEN Effectif=0 THEN 'Pas d'armée'
 \begin_inset Newline newline
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
 \end_inset
 
 WHEN Effectif<50000 THEN 'Effectif faible' 
 \begin_inset Newline newline
 \end_inset
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
 ELSE 'Effectif élévé' 
 \begin_inset Newline newline
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
 \end_inset
 
 END
 \begin_inset Newline newline
 \end_inset
 
-FROM Armée
+FROM Armée;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat de la requête 13
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

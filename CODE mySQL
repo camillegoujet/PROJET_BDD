@@ -1,6 +1,11 @@
 CREATE DATABASE Géopolitique;
 USE Géopolitique;
 
+SHOW TABLES; //liste les tables de la base de données
+
+DESCRIBE former; //liste les colonnes de la table avec leurs caractéristiques
+SHOW WARNINGS; //affiche les warnings
+
 CREATE TABLE Pays(
 	IDPays INT,
 	Nom VARCHAR(50),
@@ -94,34 +99,12 @@ CREATE TABLE Armée(
 	
 	//IMPLÉMENTATION DE LA BASE DE DONNÉES
 	
-INSERT INTO Pays(IDPays,Nom ,PIB, IDH, Arme_Atomique)
-VALUES
-//REQUETE1
-(1,"Afrique du Sud",819.093,0.705,0),
-(2,"Australie",1095,0.939,0),
-(3,"Bangladesh",687.1,0.614,0),
-(4,"Cameroun",40.13,0.590,0),
-(5,"Canada",1631.943,0.926,0),
-(6,"Inde",7965.162,0.926,1),
-(7,"Royaume-Uni",3009.325,0.924,1),
-//REQUETE2
-(8, "Brésil", 3263.832, 0.759, 0),
-(9, "Russie", 4349.420, 0.824, 1),
-(10, "Chine", 23393, 0.761, 1)   //jusque là c entré en sql
-//requete 4
-(11, "France", 2962.799, 0.901, 1),
-(12, "Espagne",  1615.074, 0.893, 0);
-(13, "Etats-Unis", 17947, 0.924, 1),
-(14, "Norvège", 322.101 , 0.954, 0),
-(15, "Allemagne", 3840.55, 0.939, 0);
-	
-	
-	
 INSERT INTO Alliance(IDAlliance, Nom, Type)
 VALUES	
 (1, "Commonwealth", "économique"),
 (2, "BRICS", "économique"),
-(3, "OTAN", "militaire");
+(3, "OTAN", "militaire")
+(4, "Union Européenne", "économique");
 	
 	
 INSERT INTO former(IDFormer,IDAlliance,IDPays,DateDébut,DateFin)	
@@ -141,7 +124,12 @@ VALUES (1, 1, 1, '1926-11-19', NOW()),
 (14, 3, 14, '1949-04-04',NOW()), 
 (15, 3, 15,'1955-05-06', NOW()),
 (16, 3, 11, '1949-04-04',NOW());
-
+(17, 4, 11, '1957-03-25', NOW()),
+(18, 4, 7, '1967-01-01', '2020-02-01'),
+(19, 4, 12, '1986-01-01', NOW()),
+(20, 4, 15, '1957-03-25', NOW()),
+(21, 4, 16, '2004-05-01', NOW()),
+(22, 4, 17, '1973-01-01', NOW());
 
 INSERT INTO Citoyens(IDCitoyens, Nom, Prénom, Nationalité, IDPays)
 VALUES (1, "GOUJET", "Camille", "France", 11),
@@ -155,19 +143,118 @@ VALUES (1, "GOUJET", "Camille", "France", 11),
 (9, "CRUZ", "Penelope","Espagne", 12); 
 	
 	
+INSERT INTO Dirigeant(IDDirigeant,
+	Nom,Prénom,Statut)
+VALUES	
+(1, "De Gaulle", "Charles", "président"),
+(2, "Pompidou", "Georges", "président"),
+(3, "Giscard d'Estaing", "Valéry","président"),
+(4, "Mittérand", "François", "président"),
+(5, "Chirac", "Jacques", "président"),
+(6, "Sarkozy","Nicolas", "président"),
+(7, "Hollande", "François", "président"),
+(8, "Macron", "Emmanuel", "président");
 	
+INSERT INTO diriger(IDDiriger,IDDirigeant,IDPays,DateDébut,DateFin)
+VALUES	
+(1, 1, 11, '1959-01-08', '1969-04-28'),
+(2, 2, 11, '1969-06-20', '1974-04-02'),
+(3, 3, 11, '1974-05-27', '1981-05-21'),
+(4, 4, 11, '1981-05-21', '1995-05-17'),
+(5, 5, 11, '1995-05-17', '2007-05-16'),
+(6, 6, 11, '2007-05-16', '2012-05-15'),
+(7, 7, 11, '2012-05-15', '2017-05-14'),
+(8, 8, 11, '2017-05-14', NOW());
+
+INSERT INTO Pays(IDPays,Nom ,PIB, IDH, Arme_Atomique)
+VALUES
+//REQUETE1
+(1,"Afrique du Sud",819.093,0.705,0),
+(2,"Australie",1095,0.939,0),
+(3,"Bangladesh",687.1,0.614,0),
+(4,"Cameroun",40.13,0.590,0),
+(5,"Canada",1631.943,0.926,0),
+(6,"Inde",7965.162,0.926,1),
+(7,"Royaume-Uni",3009.325,0.924,1),
+//REQUETE2
+(8, "Brésil", 3263.832, 0.759, 0),
+(9, "Russie", 4349.420, 0.824, 1),
+(10, "Chine", 23393, 0.761, 1)   //jusque là c entré en sql
+//requete 4
+(11, "France", 2962.799, 0.901, 1),
+(12, "Espagne",  1615.074, 0.893, 0),
+(13, "Etats-Unis", 17947, 0.924, 1),
+(14, "Norvège", 322.101 , 0.954, 0),
+(15, "Allemagne", 3840.55, 0.939, 0),
+(16, "Malte", 	14.1, 0.839, 0),
+(17, "Irlande", 385.852, 0.938, 0);
+
+INSERT INTO Armée(IDArmée,Effectif,Nom,Type,IDPays)	
+VALUES
+(1, 2183000, "Armée populaire de libération", NULL, 10),
+(2, 1395100, "Armée indienne", NULL, 6),
+(3, 1347300, "Forces armées des États-Unis", NULL, 13),
+(4, 334500, "Forces armées brésiliennes", NULL, 8),
+(14, 202950, "Forces armées françaises", NULL, 11),
+(5, 77000, "Armée de terre française", "terre", 11),
+(6, 35113, "Marine nationale française", "marine", 11),
+(7, 40531, "Armée de l'air et de l'espace", "air", 11),
+(8, 176500, "Force de défense fédérale de l'Allemagne", NULL, 15),
+(9, 157350, "Forces armées bangladaises", NULL, 3),
+(10, 152350, "Forces armées britanniques", NULL, 7),
+(11, 123200, "Forces armées espagnoles", NULL, 12),
+(12, 67100, "Force de défense nationale sud-africaine", NULL, 1),
+(13, 63000, "Forces armées canadiennes", NULL, 5),
+(15, 57800, "Force de défense australienne", NULL, 2),
+(16, 24950, "Force de défense norvégiennes", NULL, 14),
+(17, 14440, "Force armées camerounaises", NULL, 4),
+(18, 9100, "Forces de Défense irlandaises", NULL, 17),
+(19, 1950, "Forces armées de Malte", NULL, 16);
 	
-	
-	
-	//REQUETE 1 SQL
-	Liste des pays du Commonwealth (non exhaustif)
-	
-	1, Afrique du Sud, 819,093 (milliards de $), 0,705, 
-	Australie
-	Bangladesh
-	Cameroun
-	Canada
-	Inde
-	Royaume-Uni
+INSERT INTO Langue_Officielle(IDLangue,Nom)
+VALUES	
+(1, "français"),
+(2, "anglais"),
+(3, "espagnol"),
+(4, "allemand"),
+(5,"irlandais"),
+(6, "maltais"),
+(7, "norvégien"),
+(8, "russe"),
+(9, "chinois"),
+(10, "bengali"),
+(11, "mandarin"),
+(12, "hindi"),
+(13, "portugais"),
+(14, "afrikaans");
+
+INSERT INTO parler(IDPays,IDLangue)
+VALUES	
+(11, 1),
+(5, 1),
+(2, 2),
+(5, 2),
+(7, 2),
+(13, 2),
+(16, 2),
+(17, 2),
+(12, 3),
+(15, 4),
+(17, 5),
+(16, 6),
+(14, 7),
+(9, 8),
+(10, 9),
+(3, 10),
+(10, 11),
+(6, 12),
+(6, 2),
+(8, 13),
+(4, 1),
+(4, 2),
+(1, 2),
+(1, 14);
+
+
 	
 
