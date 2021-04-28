@@ -53,7 +53,7 @@ InStar
 \pdf_pdfborder false
 \pdf_colorlinks true
 \pdf_backref false
-\pdf_pdfusetitle false
+\pdf_pdfusetitle true
 \pdf_quoted_options "linkcolor=black, citecolor=black, urlcolor=blue, filecolor=blue, pdfpagelayout=OneColumn, pdfnewwindow=true, pdfstartview=XYZ, plainpages=false"
 \papersize default
 \use_geometry true
@@ -104,7 +104,11 @@ InStar
 \begin_body
 
 \begin_layout Title
-Rapport de projet de bases de données
+RAPPORT DE PROJET DE BASE DE DONNÉES
+\end_layout
+
+\begin_layout Title
+GESTION DES RELATIONS INTERNATIONALES 
 \end_layout
 
 \begin_layout Author
@@ -113,6 +117,19 @@ CAMILLE GOUJET & EMERIC NODET
 \end_inset
 
 À L'ATTENTION DE NATHALIE CHAIGNAUD
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Graphics
+	filename relations_internationales_continents.jpg.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -178,7 +195,7 @@ Les questions que nous pourrions nous poser sous les suivantes :
 \end_inset
 
 - Trier par ordre croissant les IDH des membres d’une même alliance économique
- (comme le BRICS).
+ (comme les BRICS).
 \end_layout
 
 \begin_layout Subsection
@@ -238,7 +255,7 @@ es nationalités.
 \begin_inset Newline newline
 \end_inset
 
-Dans notre modèle, nous avons crée 3 relations ternaires.
+Dans notre modèle, nous avons créée 3 relations ternaires.
  Celles-ci sont utiles quand on a besoin de connaître une occurrence de
  chaque entité pour avoir une information.
 \begin_inset Newline newline
@@ -320,9 +337,9 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename ModeleE_A.jpg
-	lyxscale 70
-	scale 40
+	filename ModeleE_A(1).png
+	lyxscale 50
+	scale 50
 	rotateOrigin center
 
 \end_inset
@@ -369,7 +386,11 @@ Dans cette partie, nous allons tenter d'expliquer les cardinalités que nous
 \begin_inset Newline newline
 \end_inset
 
+
+\emph on
 Langue officielle et Pays :
+\emph default
+
 \begin_inset Newline newline
 \end_inset
 
@@ -403,7 +424,15 @@ Langue officielle et Pays :
 \begin_inset Newline newline
 \end_inset
 
+
+\emph on
 Armée et Pays :
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -434,23 +463,25 @@ Armée et Pays :
 \begin_inset Newline newline
 \end_inset
 
+
+\emph on
 Relation ternaire engageant Pays, Date et Lieu :
+\emph default
+
 \begin_inset Newline newline
 \end_inset
 
-À une date donnée, on peut trouver aucun (si il n'y pas de guerre) à n pays.
- Une date donnée peut aussi conrrespondre à aucun comme à plusieurs lieux
- différents (on se laisse le droit de mettre 
-\begin_inset Quotes eld
+
+\begin_inset Newline newline
 \end_inset
 
-NULL
-\begin_inset Quotes erd
-\end_inset
-
- si l'endroit n'est pas explicitement nommable (exemple : guerre froide).
- Enfin, un pays peut et a pu être engagé dans plusieurs guerres s'étant
- déroulées à des endroits distincts mais à des dates distinctes aussi.
+Le principal élément de la modélisation des relations géopolitiques est
+ la gestions des différents conflits.
+ Elle est ici modélisée par une relation ternaire entre dates, lieu et pays
+ par la relation guerre avec l'idée qu'en un lieu, nous pouvons avoir plusieurs
+ pays et plusieurs dates de conflits et inversement, un pays pouvant se
+ retrouver dans plusieurs lieux à plusieurs dates différentes selon les
+ conflits dans lesquels il est ou a été engagé.
  Ainsi, on choisit une cardinalité 
 \series bold
 [ 0,n ] 
@@ -470,6 +501,8 @@ pour toutes les entités de la relation.
 \begin_inset Newline newline
 \end_inset
 
+
+\emph on
 Précision :
 \begin_inset Newline newline
 \end_inset
@@ -478,14 +511,20 @@ Précision :
 \end_layout
 
 \begin_layout Standard
-Nous avons en effet un doute sur l’intérêt d’une entité Citoyen que l’on
- pourrait décrire comme une personne avec une religion, une langue, une
- sensibilité politique qui peuvent être individuels ou regroupés dans Pays.
- Cependant, nous avons décidé de le garder pour le moment parce que nous
- considérons qu'il est intéressant de pouvoir faire des statistiques sur
- les différentes proportions des religieux au sein d'un même pays même si
- nous le rappelons, les statistiques officiels de ce genre sont interdites
- en France.
+
+\emph on
+Nous avons décidé de ne pas associer une religion à un individu mais plutôt
+ à son pays par soucis de réalisme puisque la collecte de statistiques ethniques
+ est en principe interdite en France, avec quelques exceptions très contrôlées.
+ Nous considérons qu'il est tout de même intéressant de conserver la nationalité
+ associée au citoyen d'un pays.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -501,6 +540,8 @@ Pour passer au modèle relationnel, on utilise les règles énoncées en cours.
 \begin_inset Newline newline
 \end_inset
 
+
+\emph on
 Pour chaque entité, on crée une relation de même nom que l’entité et chaque
  propriété de l’entité, y compris l’identifiant, devient un attribut de
  la relation et l’identifiant constitue la clé.
@@ -519,6 +560,8 @@ Pour les associations
  A et B, l’identifiant de B devient un attribut de RA.
  Une occurrence de A référence l’occurrence de B qui lui est associée à
  l’aide d’une clé étrangère.
+\emph default
+
 \begin_inset Newline newline
 \end_inset
 
@@ -536,11 +579,13 @@ Ici, on a donc l'identitfiant de Pays qui deviennent des attributs de Armée
 \begin_inset Newline newline
 \end_inset
 
+
+\emph on
 Ensuite, pour les associations binaires 
 \series bold
 n:n
 \series default
- entre A et B: on crée les relations RA et RB correspondant aux entités
+ entre A et B : on crée les relations RA et RB correspondant aux entités
  A et B, on crée une relation RAB pour l’association, la clé de RA et la
  clé de RB deviennent des attributs de RAB, la clé de cette relation est
  la concaténation des clés de RA et RB et les propriétés de l’association
@@ -548,6 +593,8 @@ n:n
 \begin_inset Newline newline
 \end_inset
 
+
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -565,11 +612,19 @@ Ainsi pour notre modèle, on crée les relations parler et posséder qui sont
 \begin_inset Newline newline
 \end_inset
 
+
+\emph on
 En ce qui concerne nos 3 associations ternaires, on peut appliquer la règle
  énoncée pour les associations binaires généralisées, l'idée est simplement
  comme pour les relations binaires n:n de créer une realtion RABC avec les
- clés de chacune des entités (plus éventuellement des attributs spécifiques
- à la relation comme “Perte en argent” pour guerre.
+ clés de chacune des entités
+\emph default
+ (plus éventuellement des attributs spécifiques à la relation comme “Perte
+ en argent” pour guerre.
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -624,7 +679,7 @@ Confession (
 \series bold
 IDConfession
 \series default
-, Nom, majoritaire (O/N))
+, Nom)
 \begin_inset Newline newline
 \end_inset
 
@@ -632,7 +687,7 @@ posséder(
 \series bold
 IDPays, IDConfession
 \series default
-)
+, majoritaire (O/N))
 \begin_inset Newline newline
 \end_inset
 
@@ -802,7 +857,7 @@ Confession (
 \series bold
 IDConfession
 \series default
-, Nom, majoritaire (O/N))
+, Nom)
 \begin_inset Newline newline
 \end_inset
 
@@ -810,7 +865,7 @@ posséder(
 \series bold
 IDPays,IDConfession
 \series default
-)
+, majoritaire (O/N))
 \begin_inset Newline newline
 \end_inset
 
@@ -962,15 +1017,6 @@ IDDate
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
-
-Les clés primaires respectives de chaque entité sont les attributs notés
- en gras.
-\begin_inset Newline newline
-\end_inset
-
-Les clés étrangères de chaque table sont les notations en italique.
 \end_layout
 
 \begin_layout Standard
@@ -1047,7 +1093,7 @@ Confession (
 \series bold
 IDConfession
 \series default
-, Nom, majoritaire (O/N))
+, Nom)
 \begin_inset Newline newline
 \end_inset
 
@@ -1055,7 +1101,7 @@ posséder(
 \series bold
 IDPays,IDConfession
 \series default
-)
+, majoritaire (O/N))
 \begin_inset Newline newline
 \end_inset
 
@@ -1424,7 +1470,7 @@ CREATE TABLE Armée(
 
 \begin_layout Plain Layout
 
-                   Effectif INT, 	
+                  Effectif INT, 	
 \end_layout
 
 \begin_layout Plain Layout
@@ -1434,7 +1480,7 @@ CREATE TABLE Armée(
 
 \begin_layout Plain Layout
 
-                    Type VARCHAR(50), 	
+                  Type VARCHAR(50), 	
 \end_layout
 
 \begin_layout Plain Layout
@@ -1444,12 +1490,16 @@ CREATE TABLE Armée(
 
 \begin_layout Plain Layout
 
-PRIMARY KEY(IDArmée), 	
+				  PRIMARY KEY(IDArmée), 	
 \end_layout
 
 \begin_layout Plain Layout
 
-FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+                  FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+\end_layout
+
+\begin_layout Plain Layout
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1464,17 +1514,17 @@ CREATE TABLE former(
 
 \begin_layout Plain Layout
 
-                  IDAlliance INT, 	
+                   IDAlliance INT, 	
 \end_layout
 
 \begin_layout Plain Layout
 
-                  IDPays INT, 	
+                   IDPays INT, 	
 \end_layout
 
 \begin_layout Plain Layout
 
-                     DateDébut DATE, 	
+                   DateDébut DATE, 	
 \end_layout
 
 \begin_layout Plain Layout
@@ -1489,8 +1539,13 @@ CREATE TABLE former(
 
 \begin_layout Plain Layout
 
-                  FOREIGN KEY(IDAlliance) REFERENCES Alliance(IDAlliance),
- 	               FOREIGN KEY(IDPays) REFERENCES Pays(IDPays)); 
+                   FOREIGN KEY(IDAlliance) REFERENCES Alliance(IDAlliance),
+ 	             
+\end_layout
+
+\begin_layout Plain Layout
+
+				   FOREIGN KEY(IDPays) REFERENCES Pays(IDPays)); 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1514,12 +1569,12 @@ CREATE TABLE Alliance(
 
 \begin_layout Plain Layout
 
-                      Type VARCHAR(50), 	 
+                     Type VARCHAR(50), 	 
 \end_layout
 
 \begin_layout Plain Layout
 
-                      PRIMARY KEY(IDAlliance));
+                     PRIMARY KEY(IDAlliance));
 \end_layout
 
 \begin_layout Plain Layout
@@ -1543,7 +1598,7 @@ CREATE TABLE guerre(
 
 \begin_layout Plain Layout
 
-                     Perte_en_nombres_d_hommes INT, 	
+                    Perte_en_nombres_d_hommes INT, 	
 \end_layout
 
 \begin_layout Plain Layout
@@ -1558,7 +1613,7 @@ CREATE TABLE guerre(
 
 \begin_layout Plain Layout
 
-                     DateDébut DATE, 	
+                    DateDébut DATE, 	
 \end_layout
 
 \begin_layout Plain Layout
@@ -1573,7 +1628,7 @@ CREATE TABLE guerre(
 
 \begin_layout Plain Layout
 
-FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+					FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
 \end_layout
 
 \begin_layout Plain Layout
@@ -1658,17 +1713,17 @@ CREATE TABLE diriger(
 
 \begin_layout Plain Layout
 
-IDDiriger INT, 	
+					 IDDiriger INT, 	
 \end_layout
 
 \begin_layout Plain Layout
 
-                       IDDirigeant INT, 	
+                     IDDirigeant INT, 	
 \end_layout
 
 \begin_layout Plain Layout
 
-                      IDPays INT, 	
+                     IDPays INT, 	
 \end_layout
 
 \begin_layout Plain Layout
@@ -1688,13 +1743,17 @@ IDDiriger INT,
 
 \begin_layout Plain Layout
 
-                      FOREIGN KEY(IDDirigeant) REFERENCES 		Dirigeant(IDDirigean
-t), 	
+                     FOREIGN KEY(IDDirigeant) REFERENCES 		
 \end_layout
 
 \begin_layout Plain Layout
 
-FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
+					 Dirigeant(IDDirigeant), 	
+\end_layout
+
+\begin_layout Plain Layout
+
+					 FOREIGN KEY(IDPays) REFERENCES Pays(IDPays));
 \end_layout
 
 \begin_layout Plain Layout
@@ -1736,9 +1795,10 @@ IMPLÉMENTATION DES TABLES mySQL
 
 Remarque
 \emph default
- : Comme vous pouvez le constater dans le code ci-dessus, j'ai utilisé plusieurs
- fois le type bool qui n'existe pas à proprement parler dans mySQL, la valeur
- sera en fait stockée comme une variable de type TINYINT propre à mySQL.
+ : Comme vous pouvez le constater dans le code ci-dessus,nous avons utilisé
+ plusieurs fois le type bool qui n'existe pas à proprement parler dans mySQL,
+ la valeur sera en fait stockée comme une variable de type TINYINT propre
+ à mySQL.
  Et, par quelques lignes de commande que nous verrons plus bas, nous assignerons
  le 
 \begin_inset Quotes eld
@@ -1883,17 +1943,17 @@ EXEMPLE D'IMPLÉMENTATION DE LA BASE DE DONNÉES
 Remarques : 
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 
 \emph on
-Les commandes DAY(date) , MONTH(date) , YEAR(date) permettent d'extraire
- le jour, le mois ou l'année d'une date.
+Les commandes NOW() permet d'extraire l'heure, le jour, le mois et l'année
+ du moment où on exécute la requête.
 \end_layout
 
-\begin_layout Standard
+\begin_layout Itemize
 
 \emph on
-Pour le PIB, on utilise le PIB(PPA = parité de pouvoir d'achat).
+Pour le PIB, on utilise le PIB PPA (PPA = parité de pouvoir d'achat).
  C'est une méthode utilisée en économie pour établir une comparaison, entre
  pays, du pouvoir d'achat des devises nationales, ce qu’une simple utilisation
  des taux de change ne permet pas de faire.
@@ -1916,6 +1976,22 @@ Pour le PIB, on utilise le PIB(PPA = parité de pouvoir d'achat).
 
 \begin_layout Section
 Requêtes SQL
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pour des raisons évidentes, il nous sera impossible d'obtenir des listes
+ et des réponses exhaustives à nos requêtes.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Nous avons choisi certains pays de manière à ce que nos requêtes aient un
+ sens et ceux-ci serviront à illustrer l'utilisation que l'on peut faire
+ de cette base de données.
 \end_layout
 
 \begin_layout Subsection
@@ -1925,10 +2001,13 @@ Requête 1
 \begin_layout Standard
 
 \series bold
+\emph on
 1) Quels pays composent l’union commerciale du Commonwealth (dont le dénominateu
 r commun est l’ancien empire britannique et donc sa langue) ?
 \series default
- (liste non exhaustive) 
+ (liste non exhaustive)
+\emph default
+ 
 \color red
 
 \begin_inset Newline newline
@@ -2038,9 +2117,11 @@ Requête 2
 \begin_layout Standard
 
 \series bold
+\emph on
 2) Trier par ordre croissant les IDH des membres de l'alliance économique
  BRICS (ORDER BY + jointure Pays Alliance)
 \series default
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -2156,18 +2237,12 @@ Requête 3
 \begin_layout Standard
 
 \series bold
-3) Quelles sont les confessions présentes dans un conflit donné? ( requête
- jointure avec 2 fois la même table)
+\emph on
+3) Quelles sont les confessions présentes dans le conflit indo-pakistanais
+ de 2019? 
 \series default
+\emph default
 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-A FAIRE 
 \begin_inset Newline newline
 \end_inset
 
@@ -2180,7 +2255,7 @@ La formule d'algèbre relationnelle est :
 \end_inset
 
 
-\begin_inset Formula $\pi_{Confession.Nom}(\sigma_{guerre.IDGuerre=x}(guerre\infty Pays\infty Confession))$
+\begin_inset Formula $\pi_{Confession.Nom}(\sigma_{g.Nom='Confrontation\,indo-pakistanaise\,de\,2019'}(guerre\infty Pays\infty posséder\infty Confession))$
 \end_inset
 
 
@@ -2196,6 +2271,69 @@ La requête SQL à entrer en machine est :
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+SELECT DISTINCT c.Nom AS Nom_Confession
+\end_layout
+
+\begin_layout Standard
+FROM Confession AS c
+\end_layout
+
+\begin_layout Standard
+INNER JOIN posséder AS p ON c.IDConfession = p.IDConfession
+\end_layout
+
+\begin_layout Standard
+INNER JOIN Pays ON Pays.IDPays =p.IDPays
+\end_layout
+
+\begin_layout Standard
+INNER JOIN guerre AS g ON g.IDPays = p.IDPays
+\end_layout
+
+\begin_layout Standard
+WHERE g.Nom = 'Confrontation indo-pakistanaise de 2019';
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete3.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2205,9 +2343,11 @@ Requête 4
 \begin_layout Standard
 
 \series bold
+\emph on
 4) Lister les pays qui contiennent plus de 4 habitants.
  
 \series default
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -2329,14 +2469,16 @@ Requête 5
 \begin_layout Standard
 
 \series bold
+\emph on
 5) Sélectionner la nationalité majoritaire des citoyens d'un pays qui n'ont
  pas la nationalité de ce pays.
 \begin_inset Newline newline
 \end_inset
 
 Quelle est la nationalité majoritaire parmi les étrangers résidant en France
- ?)
+ ?
 \series default
+\emph default
  
 \begin_inset Newline newline
 \end_inset
@@ -2394,15 +2536,13 @@ LIMIT 1;
 \end_inset
 
 
+\emph on
+
 \begin_inset Newline newline
 \end_inset
 
-
-\emph on
 Remarques : -LIMIT i permet de restreindre au nombre indiqué i les résultats
  de la requête qui vient d'être tapée.
-\emph default
-
 \begin_inset Newline newline
 \end_inset
 
@@ -2496,6 +2636,12 @@ Remarques : -LIMIT i permet de restreindre au nombre indiqué i les résultats
 
 - ORDER BY ....
  DESC permet un tri dan l'ordre décroissant
+\emph default
+
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -2581,10 +2727,13 @@ Requête 6
 \begin_layout Standard
 
 \series bold
+\emph on
 6) Sélectionner les pays qui ne font pas partie de l'OTAN.
 
 \series default
  
+\emph default
+
 \begin_inset Newline newline
 \end_inset
 
@@ -2699,6 +2848,7 @@ Requête 7
 \begin_layout Standard
 
 \series bold
+\emph on
 7) Sélectionner les pays qui contiennent un 
 \begin_inset Quotes eld
 \end_inset
@@ -2710,6 +2860,7 @@ e
  dans leur nom.
  
 \series default
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -2808,20 +2959,10 @@ Requête 8
 \begin_layout Standard
 
 \series bold
+\emph on
 8) Liste des pays qui font partie de toutes les alliances.
 \series default
-
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-A REVOIR!!!!!!!!!!
-\begin_inset Newline newline
-\end_inset
-
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -2835,7 +2976,7 @@ La formule d'algèbre relationnelle est :
 \end_inset
 
 
-\begin_inset Formula $\pi_{Pays.Nom}(Pays-\sigma_{a.Nom=NULL}(Pays\infty former\infty Alliance))$
+\begin_inset Formula $\pi_{Pays.Nom}(Pays)-\pi_{Pays.Nom}((\pi_{Pays.IDPays}(former)X\pi_{Alliance.IDAlliance}(former))-Pays)$
 \end_inset
 
 
@@ -2872,1263 +3013,27 @@ La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
-SELECT DISTINCT p.Nom AS NomPays 
+SELECT DISTINCT Pays.Nom AS NomPays 
 \begin_inset Newline newline
 \end_inset
 
-FROM Pays AS p, Alliance AS a
+FROM Pays WHERE NOT EXISTS 
 \begin_inset Newline newline
 \end_inset
 
-WHERE NOT EXISTS (SELECT Nom 
+(SELECT * FROM former WHERE NOT EXISTS 
 \begin_inset Newline newline
 \end_inset
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-FROM a
+(SELECT * FROM former f, Pays p, Alliance a 
 \begin_inset Newline newline
 \end_inset
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-WHERE NOT EXISTS (SELECT p.Nom 
+WHERE p.IDPays = f.IDPays and a.IDAlliance = f.IDAlliance 
 \begin_inset Newline newline
 \end_inset
 
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-FROM p
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-INNER JOIN former AS f ON f.IDPays = p.IDPays
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-
-\begin_inset space ~
-\end_inset
-
-INNER JOIN Alliance ON a.IDAlliance = f.IDAlliance));
+AND Pays.IDPays = p.IDPays AND former.IDPays = f.IDPays));
 \begin_inset Newline newline
 \end_inset
 
@@ -4142,12 +3047,14 @@ Requête 9
 \begin_layout Standard
 
 \series bold
+\emph on
 9) Lister tous les présidents de la 
 \begin_inset Formula $V^{e}$
 \end_inset
 
 République en France à partir de 1995.
 \series default
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -4252,8 +3159,10 @@ Requête 10
 \begin_layout Standard
 
 \series bold
+\emph on
 10) Parmi les pays de l'UE, quels sont les pays qui parlent anglais ?
 \series default
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -4318,6 +3227,11 @@ WHERE l.Nom = 'anglais');
 \begin_inset Newline newline
 \end_inset
 
+D'abord, nous affichons la table contenant tous les pays et leur langue
+ officielle pour mieux visualiser :
+\begin_inset Newline newline
+\end_inset
+
 
 \begin_inset Float figure
 wide false
@@ -4352,6 +3266,14 @@ Table contenant tous les pays et leur langue officielle
 
 \end_layout
 
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ainsi, dans l'Union Européenne, seuls les pays-ci parlent anglais :
+\begin_inset Newline newline
 \end_inset
 
 
@@ -4400,7 +3322,7 @@ Requête 11
 \begin_layout Standard
 
 \series bold
-11) Nombre d'habitants des pays avec bombe atomique
+11) Nombre d'habitants dans les pays possédant l'arme atomique
 \series default
 
 \begin_inset Newline newline
@@ -4447,6 +3369,10 @@ WHERE p.Arme_Atomique = 1
 \end_inset
 
 GROUP BY p.IDPays;
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -4544,18 +3470,12 @@ Requête 12
 \begin_layout Standard
 
 \series bold
-12) Les armées présentes dans les guerres des pays chiites en 2018 (=les
- armées des pays en partie au moins chiites en guerre en 2018)
+\emph on
+12) Quelles sont les armées présentes dans les guerres des pays chiites
+ en 1947 (=les armées des pays en partie au moins chiites en guerre en 1947)
 \series default
+\emph default
 
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-A FAIRE SVP (ENTRER LIGNES QU'IL FAUT DANS FICHIER CODE SQL ET REQUETE)
 \begin_inset Newline newline
 \end_inset
 
@@ -4572,11 +3492,7 @@ La formule d'algèbre relationnelle est :
 \end_inset
 
 
-\begin_inset Formula $\pi_{Armée.Nom}((\sigma_{DD<2018,DF>2018}(Guerre\infty Pays))X(\sigma_{c.Nom="chiite"}(Confession\infty posséder\infty Pays)))$
-\end_inset
-
-
-\begin_inset Newline newline
+\begin_inset Formula $\pi_{Armée.Nom(}((\sigma_{DD<=1947,DF>=1947}(Guerre\infty Pays))X(\sigma_{c.Nom="chiisme"}(Confession\infty posséder\infty Pays)))\infty Armée)$
 \end_inset
 
 
@@ -4595,6 +3511,50 @@ La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
+SELECT a.Nom AS Nom_Armée, Effectif
+\begin_inset Newline newline
+\end_inset
+
+FROM (SELECT p1.IDPays FROM 
+\begin_inset Newline newline
+\end_inset
+
+(SELECT Pays.IDPays FROM Pays 
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN posséder ON posséder.IDPays = Pays.IDPays
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Confession AS c ON c.IDConfession = posséder.IDConfession
+\begin_inset Newline newline
+\end_inset
+
+WHERE c.Nom = 'Chiisme') AS p1
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN guerre ON guerre.IDPays = p1.IDPays
+\begin_inset Newline newline
+\end_inset
+
+WHERE YEAR(guerre.DateDébut) <=1947
+\begin_inset Newline newline
+\end_inset
+
+AND YEAR(guerre.DateFin)>=1947) AS p2 
+\begin_inset Newline newline
+\end_inset
+
+INNER JOIN Armée AS a ON p2.IDPays= a.IDPays;
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
 
 \begin_inset Float figure
 wide false
@@ -4602,6 +3562,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete12.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
 
 \end_layout
 
@@ -4633,8 +3601,10 @@ Requête 13
 \begin_layout Standard
 
 \series bold
-13) Message à afficher selon l'effectif d'une armée pour un pays 
+\emph on
+13) Liste des langues parlées par au moins deux pays?
 \series default
+\emph default
 
 \begin_inset Newline newline
 \end_inset
@@ -4644,6 +3614,14 @@ Requête 13
 \end_inset
 
 La formule d'algèbre relationnelle est :
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\pi_{LangueOfficielle.Nom}((LangueOfficielle\infty parler)\infty_{IDLangue=IDLangue\land x.IDPays\neq y.IDPays}parler)$
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -4659,35 +3637,23 @@ La requête SQL à entrer en machine est :
 \begin_inset Newline newline
 \end_inset
 
-SELECT *
+SELECT DISTINCT Langue_Officielle.Nom 
 \begin_inset Newline newline
 \end_inset
 
-CASE 
+FROM Langue_Officielle, parler x, parler y
 \begin_inset Newline newline
 \end_inset
 
-WHEN Effectif=0 THEN 'Pas d'armée'
+WHERE x.IDPays != y.IDPays 
 \begin_inset Newline newline
 \end_inset
 
-WHEN Effectif<50000 THEN 'Effectif faible' 
+AND Langue_Officielle.IDLangue = x.IDLangue 
 \begin_inset Newline newline
 \end_inset
 
-ELSE 'Effectif élévé' 
-\begin_inset Newline newline
-\end_inset
-
-END
-\begin_inset Newline newline
-\end_inset
-
-FROM Armée;
-\begin_inset Newline newline
-\end_inset
-
-
+AND x.IDLangue = y.IDLangue;
 \begin_inset Newline newline
 \end_inset
 
@@ -4702,6 +3668,14 @@ sideways false
 status open
 
 \begin_layout Plain Layout
+\begin_inset Graphics
+	filename requete13.png
+	lyxscale 50
+	scale 50
+	rotateOrigin center
+
+\end_inset
+
 
 \end_layout
 

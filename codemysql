@@ -71,6 +71,7 @@ CREATE TABLE Armée(
 
 	CREATE TABLE guerre(
 	IDGuerre INT,
+	Nom VARCHAR(250),
 	IDPays INT,
 	Perte_en_nombres_d_hommes INT,
 	Perte_en_argent INT,
@@ -187,7 +188,8 @@ VALUES
 (14, "Norvège", 322.101 , 0.954, 0),
 (15, "Allemagne", 3840.55, 0.939, 0),
 (16, "Malte", 	14.1, 0.839, 0),
-(17, "Irlande", 385.852, 0.938, 0);
+(17, "Irlande", 385.852, 0.938, 0),
+(18,"Pakistan",278.2,0.550,1);
 
 INSERT INTO Armée(IDArmée,Effectif,Nom,Type,IDPays)	
 VALUES
@@ -209,7 +211,8 @@ VALUES
 (16, 24950, "Force de défense norvégiennes", NULL, 14),
 (17, 14440, "Force armées camerounaises", NULL, 4),
 (18, 9100, "Forces de Défense irlandaises", NULL, 17),
-(19, 1950, "Forces armées de Malte", NULL, 16);
+(19, 1950, "Forces armées de Malte", NULL, 16),
+(20,650000,"Forces armées pakistanaises", NULL, 18);
 	
 INSERT INTO Langue_Officielle(IDLangue,Nom)
 VALUES	
@@ -226,7 +229,8 @@ VALUES
 (11, "mandarin"),
 (12, "hindi"),
 (13, "portugais"),
-(14, "afrikaans");
+(14, "afrikaans"),
+(15,"ourdou");
 
 INSERT INTO parler(IDPays,IDLangue)
 VALUES	
@@ -253,7 +257,64 @@ VALUES
 (4, 1),
 (4, 2),
 (1, 2),
-(1, 14);
+(1, 14),
+(18,2),
+(18,15);
+
+
+INSERT INTO posséder(IDPays,IDConfession,majoritaire)
+VALUES
+(1,2,1),
+(1,1,0),
+(1,7,0),
+(2,1,1),
+(2,2,0),
+(2,3,0),
+(3,4,1),
+(3,5,0),
+(3,7,0),
+(4,1,1),
+(4,2,0),
+(4,4,0),
+(5,1,1),
+(5,2,0),
+(5,4,0),
+(6,7,1),
+(6,4,0),
+(6,5,0),
+(7,1,0),
+(7,4,0),
+(7,7,0),
+(18,4,1),
+(18,5,0),
+(18,7,0);
+
+INSERT INTO Confession (IDConfession, Nom)
+VALUES
+(1,"Catholicisme"),
+(2,"Protestantisme"),
+(3,"Orthodoxie"),
+(4,"Sunnisme"),
+(5,"chiisme"),
+(6,"Judaïsme"),
+(7,"Hindouisme");
+
+INSERT INTO guerre(IDGuerre, Nom,IDPays,Perte_en_nombres_d_hommes,Perte_en_argent,NomLieu,DateDébut,DateFin)
+VALUES	
+(1,"Confrontation indo-pakistanaise de 2019",6,48,NULL,"Cachemire",'2019-02-14', '2019-03-22'),
+(2,"Confrontation indo-pakistanaise de 2019", 18,358,NULL,"Cachemire",'2019-02-14', '2019-03-22'),
+(3, "Première guerre indo-pakistanaise", 6,1604,NULL,"Cachemire",'1947-10-21', '1948-12-31'),
+(4,"Première guerre indo-pakistanaise", 18,1002,NULL,"Cachemire",'1947-10-21', '1948-12-31');
+
+
+
+
+//On a du changer la colonne "majoritaire" de Confession à la table posséder :
+ALTER TABLE posséder
+ADD majoritaire BOOL
+
+ALTER TABLE Confession
+DROP COLUMN majoritaire
 
 
 	
